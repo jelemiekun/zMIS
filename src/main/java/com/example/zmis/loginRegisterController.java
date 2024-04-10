@@ -51,11 +51,13 @@ public class loginRegisterController implements Initializable {
     @FXML
     void btnLoginOnAction() {
         btnProceed.setText("Log in");
+        clearFields();
     }
 
     @FXML
     void btnRegisterOnAction() {
         btnProceed.setText("Register");
+        clearFields();
     }
 
     @FXML
@@ -81,11 +83,8 @@ public class loginRegisterController implements Initializable {
 
         if (!email.isEmpty() && !password.isEmpty()) {
             if (btnProceed.getText().equals("Log in")) {
-                if (SQLLogin(email, password)) {
+                if (SQLLogin(email, password))
                     goToMain();
-                } else {
-                    alertIncorrectCredentials();
-                }
             } else if (btnProceed.getText().equals("Register")) {
                 if (SQLRegister(email, password)) {
                     clearFields();

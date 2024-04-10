@@ -31,65 +31,82 @@ public class SQL {
 
     public static boolean SQLLogin(String email, String password) {
         try {
-            Connection connection = dataSource.getConnection();
+            if (dataSource != null) {
+                Connection connection = dataSource.getConnection();
 
-            String query = "SELECT password FROM login_register where email = ?";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+                String query = "SELECT password FROM login_register where email = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, email);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+                ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                String dbPassword = resultSet.getString("password");
-                return dbPassword.equals(password);
+                if (resultSet.next()) {
+                    String dbPassword = resultSet.getString("password");
+                    return dbPassword.equals(password);
+                }
+                alertIncorrectCredentials();
+                return false;
+            } else {
+                alertNoConnection();
+                return false;
             }
-            return false;
         } catch (SQLException e) {
+            alertNoConnection();
             return false;
         }
     }
 
     public static boolean SQLRegister(String email, String password) {
         try {
-            if (!SQLEmailAlreadyExists(email)) {
-                Connection connection = dataSource.getConnection();
+            if (dataSource != null) {
+                if (!SQLEmailAlreadyExists(email)) {
+                    Connection connection = dataSource.getConnection();
 
-                String addToStudentQuery = "INSERT INTO student (email, password) values (?, ?);";
-                preparedStatement = connection.prepareStatement(addToStudentQuery);
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, password);
+                    String addToStudentQuery = "INSERT INTO student (email, password) values (?, ?);";
+                    preparedStatement = connection.prepareStatement(addToStudentQuery);
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setString(2, password);
 
-                preparedStatement.executeUpdate();
+                    preparedStatement.executeUpdate();
 
-                String addToLoginQuery = "INSERT INTO login_register (email, password, credentials_id)" +
-                        "VALUES (?, ?, (SELECT id FROM student WHERE email = ?))";
-                preparedStatement = connection.prepareStatement(addToLoginQuery);
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, password);
-                preparedStatement.setString(3 , email);
+                    String addToLoginQuery = "INSERT INTO login_register (email, password, credentials_id)" +
+                            "VALUES (?, ?, (SELECT id FROM student WHERE email = ?))";
+                    preparedStatement = connection.prepareStatement(addToLoginQuery);
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setString(2, password);
+                    preparedStatement.setString(3 , email);
 
-                preparedStatement.executeUpdate();
-                alertRegisterSuccess();
-                return true;
+                    preparedStatement.executeUpdate();
+                    alertRegisterSuccess();
+                    return true;
+                } else {
+                    alertRegisterEmailExists();
+                    return false;
+                }
             } else {
-                alertRegisterEmailExists();
-                return false;
+                alertNoConnection();
             }
+            return false;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            alertNoConnection();
             return false;
         }
     }
 
     private static boolean SQLEmailAlreadyExists(String email) {
         try {
-            Connection connection = dataSource.getConnection();
-            String searchAllEmailQuery = "SELECT email FROM login_register WHERE email = ?";
-            preparedStatement = connection.prepareStatement(searchAllEmailQuery);
-            preparedStatement.setString(1, email);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next();
+            if (dataSource != null) {
+                Connection connection = dataSource.getConnection();
+                String searchAllEmailQuery = "SELECT email FROM login_register WHERE email = ?";
+                preparedStatement = connection.prepareStatement(searchAllEmailQuery);
+                preparedStatement.setString(1, email);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    return resultSet.next();
+                }
+            } else {
+                alertNoConnection();
             }
+            return true;
         } catch (SQLException e) {
             return true;
         }

@@ -2,14 +2,20 @@ package com.example.zmis;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -53,30 +59,30 @@ public class loginRegisterController implements Initializable {
     }
 
     @FXML
-    void btnProceedOnAction() {
+    void btnProceedOnAction() throws IOException {
         proceed();
     }
 
     @FXML
-    void passwordFieldPasswordPressedEnter(KeyEvent event) {
+    void passwordFieldPasswordPressedEnter(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER)
             proceed();
     }
 
     @FXML
-    void textFieldEmailPressedEnter(KeyEvent event) {
+    void textFieldEmailPressedEnter(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER)
             proceed();
     }
 
-    private void proceed() {
+    private void proceed() throws IOException {
         String email = textFieldEmail.getText().trim();
         String password = passwordFieldPassword.getText().trim();
 
         if (!email.isEmpty() && !password.isEmpty()) {
             if (btnProceed.getText().equals("Log in")) {
                 if (SQLLogin(email, password)) {
-                    System.exit(0);
+                    goToMain();
                 } else {
                     alertIncorrectCredentials();
                 }
@@ -98,5 +104,17 @@ public class loginRegisterController implements Initializable {
     private void clearFields() {
         textFieldEmail.setText("");
         passwordFieldPassword.setText("");
+    }
+
+    private void goToMain() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/zmis/main.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage thisStage = (Stage) anchorPaneOperation.getScene().getWindow();
+        thisStage.close();
     }
 }

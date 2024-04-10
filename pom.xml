@@ -75,6 +75,113 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>2.3.0</version>
         </dependency>
+
+        <!-- SceneBuilder elements -->
+        <!-- https://mvnrepository.com/artifact/com.gluonhq/charm-down-core -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-down-core</artifactId>
+            <version>3.8.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.gluonhq/charm-down-core-android -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-down-core-android</artifactId>
+            <version>3.8.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.gluonhq/charm-down-core-ios -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-down-core-ios</artifactId>
+            <version>3.8.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.gluonhq/charm-glisten -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>6.2.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx-fontawesome -->
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx-fontawesome</artifactId>
+            <version>4.7.0-9.1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx-commons -->
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx-commons</artifactId>
+            <version>9.1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.17.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.gluonhq/charm-down-plugin-audio-recording -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-down-plugin-audio-recording</artifactId>
+            <version>3.8.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.palexdev/materialfx -->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.17.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.palexdev/mfxeffects -->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>mfxeffects</artifactId>
+            <version>11.3.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.palexdev/mfxresources -->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>mfxresources</artifactId>
+            <version>11.9.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.palexdev/mfxcore -->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>mfxcore</artifactId>
+            <version>11.8.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/eu.mihosoft.ext.org.fxyz/extfxyz -->
+        <dependency>
+            <groupId>eu.mihosoft.ext.org.fxyz</groupId>
+            <artifactId>extfxyz</artifactId>
+            <version>0.4</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.fxyz3d/fxyz3d -->
+        <dependency>
+            <groupId>org.fxyz3d</groupId>
+            <artifactId>fxyz3d</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.dooapp.fxform2/core -->
+        <dependency>
+            <groupId>com.dooapp.fxform2</groupId>
+            <artifactId>core</artifactId>
+            <version>9.0.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

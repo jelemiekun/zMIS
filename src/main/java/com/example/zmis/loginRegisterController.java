@@ -1,15 +1,21 @@
 package com.example.zmis;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static com.example.zmis.Alerts.*;
 import static com.example.zmis.SQL.*;
 
-public class loginRegisterController {
+public class loginRegisterController implements Initializable {
 
     @FXML
     private AnchorPane anchorPaneOperation;
@@ -29,6 +35,11 @@ public class loginRegisterController {
     @FXML
     private TextField textFieldEmail;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        btnProceed.setText("Log in");
+    }
+
     @FXML
     void btnLoginOnAction() {
         btnProceed.setText("Log in");
@@ -46,34 +57,38 @@ public class loginRegisterController {
 
     @FXML
     void passwordFieldPasswordPressedEnter(KeyEvent event) {
-        proceed();
+        if (event.getCode() == KeyCode.ENTER)
+            proceed();
     }
 
     @FXML
     void textFieldEmailPressedEnter(KeyEvent event) {
-        proceed();
+        if (event.getCode() == KeyCode.ENTER)
+            proceed();
     }
 
     private void proceed() {
         String email = textFieldEmail.getText().trim();
         String password = passwordFieldPassword.getText().trim();
 
-        if (!email.isEmpty() || !password.isEmpty()) {
+        if (!email.isEmpty() && !password.isEmpty()) {
             if (btnProceed.getText().equals("Log in")) {
-                if (SQLLogin()) {
-                    // proceed sa login
+                if (SQLLogin(email, password)) {
+                    System.exit(0);
                 } else {
-                    // incorrect email or password
+                    alertIncorrectCredentials();
                 }
             } else if (btnProceed.getText().equals("Register")) {
-                if (SQLRegister()) {
-                    // proceed sa login, alert na success ang register
+                if (SQLRegister(email, password)) {
+                    alertRegisterSuccess();
+                    btnProceed.setText("Log in");
                 } else {
+                    System.out.println("may mali");
                     // ewan ko anong error pede maencounter dito? bat false
                 }
             }
         } else {
-            // Some fields are blank
+            alertSomeFieldsAreBlank();
         }
     }
 }

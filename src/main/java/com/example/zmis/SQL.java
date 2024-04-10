@@ -1,9 +1,6 @@
 package com.example.zmis;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static com.example.zmis.Alerts.*;
 
@@ -23,11 +20,45 @@ public class SQL {
         System.out.println("Connected to tiDB database.");
     }
 
-    public static boolean SQLLogin() {
-        return false;
+    public static boolean SQLLogin(String email, String password) {
+        try {
+            String query = "SELECT password FROM login_register where email = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String dbPassword = resultSet.getString("password");
+                return dbPassword.equals(password);
+            }
+            return false;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
-    public static boolean SQLRegister() {
-        return false;
+    public static boolean SQLRegister(String email, String password) {
+        try {
+            String addToStudentQuery = "INSERT INTO student (email, password) values (?, ?);";
+            preparedStatement = connection.prepareStatement(addToStudentQuery);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+
+            preparedStatement.executeUpdate();
+
+            String addToLoginQuery = "INSERT INTO login_register (email, password, credentials_id)" +
+                    "VALUES (?, ?, (SELECT id FROM student WHERE email = ?))";
+            preparedStatement = connection.prepareStatement(addToLoginQuery);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3 , email);
+
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }

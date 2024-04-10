@@ -29,10 +29,18 @@ public class Alerts {
     }
 
     public static void alertRegisterSuccess() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText("Registration Successful");
         alert.setContentText("Your registration has been completed successfully. You can now log in with your credentials.");
+        alert.show();
+    }
+
+    public static void alertRegisterEmailExists() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Duplicate email registration");
+        alert.setContentText("Email already registered. Please use a different email.");
         alert.show();
     }
 }

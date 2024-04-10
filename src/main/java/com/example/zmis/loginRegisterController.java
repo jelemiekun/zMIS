@@ -1,5 +1,6 @@
 package com.example.zmis;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -38,6 +39,7 @@ public class loginRegisterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnProceed.setText("Log in");
+        Platform.runLater(() -> anchorPaneOperation.requestFocus());
     }
 
     @FXML
@@ -80,7 +82,8 @@ public class loginRegisterController implements Initializable {
                 }
             } else if (btnProceed.getText().equals("Register")) {
                 if (SQLRegister(email, password)) {
-                    alertRegisterSuccess();
+                    clearFields();
+                    anchorPaneOperation.requestFocus();
                     btnProceed.setText("Log in");
                 } else {
                     System.out.println("may mali");
@@ -90,5 +93,10 @@ public class loginRegisterController implements Initializable {
         } else {
             alertSomeFieldsAreBlank();
         }
+    }
+
+    private void clearFields() {
+        textFieldEmail.setText("");
+        passwordFieldPassword.setText("");
     }
 }

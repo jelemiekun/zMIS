@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -118,7 +118,7 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="anchorPaneEnroll" onMouseClicked="#anchorPaneEnrollRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
+                                    <AnchorPane fx:id="anchorPaneEnroll" onMouseClicked="#anchorPaneEnrollRequestFocus" prefHeight="662.0" prefWidth="1310.0">
                                        <children>
                                           <MFXTextField fx:id="textFieldFullName" floatingText="Full Name" layoutX="16.0" layoutY="91.0" prefHeight="58.0" prefWidth="600.0">
                                              <font>
@@ -135,12 +135,12 @@
                                                 <Font name="Gill Sans MT" size="14.0" />
                                              </font>
                                           </MFXTextField>
-                                          <MFXTextField fx:id="comboBoxPhoneNumber" floatingText="Phone Number" layoutX="636.0" layoutY="273.0" prefHeight="58.0" prefWidth="670.0">
+                                          <MFXTextField fx:id="textFieldPhoneNumber" floatingText="Phone Number" layoutX="636.0" layoutY="273.0" prefHeight="58.0" prefWidth="670.0">
                                              <font>
                                                 <Font name="Gill Sans MT" size="14.0" />
                                              </font>
                                           </MFXTextField>
-                                          <MFXLegacyComboBox fx:id="comboBoxStrand" layoutX="973.0" layoutY="186.0" onAction="#comboBoxStrandOnAction" prefHeight="58.0" prefWidth="333.0" promptText="Strand" />
+                                          <MFXLegacyComboBox fx:id="comboBoxStrand" layoutX="973.0" layoutY="186.0" onAction="#comboBoxStrandOnAction" prefHeight="58.0" prefWidth="333.0" promptText="Select Strand" />
                                           <Label layoutX="27.0" layoutY="67.0" text="First name                Middle name                Last name                Suffix" textFill="#838282">
                                              <font>
                                                 <Font name="Gill Sans MT Italic" size="16.0" />
@@ -151,8 +151,8 @@
                                                 <Font name="Gill Sans MT" size="14.0" />
                                              </font>
                                           </MFXTextField>
-                                          <MFXLegacyComboBox fx:id="comboBoxSex" layoutX="237.0" layoutY="186.0" onAction="#comboBoxSexOnAction" prefHeight="58.0" prefWidth="173.0" />
-                                          <MFXLegacyComboBox fx:id="comboBoxCivilStatus" layoutX="617.0" layoutY="186.0" onAction="#comboBoxCivilStatusOnAction" prefHeight="58.0" prefWidth="336.0" promptText="Civil Status" />
+                                          <MFXLegacyComboBox fx:id="comboBoxSex" layoutX="237.0" layoutY="186.0" onAction="#comboBoxSexOnAction" prefHeight="58.0" prefWidth="173.0" promptText="Select Sex" />
+                                          <MFXLegacyComboBox fx:id="comboBoxCivilStatus" layoutX="617.0" layoutY="186.0" onAction="#comboBoxCivilStatusOnAction" prefHeight="58.0" prefWidth="336.0" promptText="Select Civil Status" />
                                           <MFXTextField fx:id="textFieldElementarySchool" floatingText="Elementary School" layoutX="13.0" layoutY="455.0" prefHeight="58.0" prefWidth="452.0">
                                              <font>
                                                 <Font name="Gill Sans MT" size="14.0" />
@@ -173,7 +173,7 @@
                                                 <Font name="Gill Sans MT" size="14.0" />
                                              </font>
                                           </MFXTextField>
-                                          <DatePicker fx:id="datePickerDateOfBirth" layoutX="18.0" layoutY="186.0" prefHeight="57.0" prefWidth="197.0" promptText="MM/DD/YYYY" />
+                                          <DatePicker fx:id="datePickerDateOfBirth" editable="false" layoutX="18.0" layoutY="186.0" onAction="#datePickerDateOfBirthOnAction" prefHeight="57.0" prefWidth="197.0" promptText="MM/DD/YYYY" />
                                           <JFXCheckBox fx:id="checkBoxForm137" layoutX="830.0" layoutY="522.0" onAction="#checkBoxEnrollOnAction" text="Form 137">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
@@ -194,12 +194,12 @@
                                                 <Font name="Gill Sans MT Italic" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="245.0" layoutY="162.0" text="Sex" textFill="#838282">
+                                          <Label layoutX="245.0" layoutY="162.0" text="Sex" textFill="#838282" visible="false">
                                              <font>
                                                 <Font name="Gill Sans MT Italic" size="16.0" />
                                              </font>
                                           </Label>
-                                          <MFXTextField fx:id="comboBoxEmailAddress" allowEdit="false" floatingText="Email Address" layoutX="17.0" layoutY="273.0" prefHeight="58.0" prefWidth="600.0">
+                                          <MFXTextField fx:id="textFieldEmailAddress" allowEdit="false" floatingText="Email Address" layoutX="17.0" layoutY="273.0" prefHeight="58.0" prefWidth="600.0">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
                                              </font>
@@ -240,6 +240,16 @@
                                           <Label layoutX="595.0" layoutY="434.0" text="ex. (2011-2018)" textFill="#838282">
                                              <font>
                                                 <Font name="Gill Sans MT Italic" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="623.0" layoutY="162.0" text="Civil Status" textFill="#838282" visible="false">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="983.0" layoutY="162.0" text="Strand" textFill="#838282" visible="false">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
                                              </font>
                                           </Label>
                                        </children>

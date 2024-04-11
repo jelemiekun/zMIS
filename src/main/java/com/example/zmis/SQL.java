@@ -1,6 +1,7 @@
 package com.example.zmis;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -224,8 +225,29 @@ public class SQL {
 
                 if (resultSet.next()) {
                     String email = resultSet.getString("email");
-                    String password = resultSet.getString("password");
-                    int isApplied = resultSet.getInt("is_applied");
+                    String lrn = resultSet.getString("LRN");
+                    String fullName = resultSet.getString("full_name");
+                    String phoneNumber = resultSet.getString("phone_number");
+                    String strand = resultSet.getString("strand");
+                    String section = resultSet.getString("section");
+                    int age = resultSet.getInt("age");
+                    String sex = resultSet.getString("sex");
+                    LocalDate birthdate = LocalDate.parse(resultSet.getString("birthdate"));
+                    String address = resultSet.getString("address");
+                    String civilStatus = resultSet.getString("civil_status");
+                    String elemSchool = resultSet.getString("elem_school");
+                    String elemSchoolSY = resultSet.getString("elem_SY");
+                    String juniorHS = resultSet.getString("junior_hs");
+                    String juniorHSSY = resultSet.getString("junior_hs_SY");
+                    String documentStatus = resultSet.getString("document_status");
+                    boolean form137 = resultSet.getInt("form_137") == 1;
+                    boolean form138 = resultSet.getInt("form_138") == 1;
+                    boolean goodMoral = resultSet.getInt("good_moral") == 1;
+                    boolean isApplied = resultSet.getInt("is_applied") == 1;
+
+                    populatedAccount = new Account(email, lrn, fullName, phoneNumber, strand, section, age, sex, birthdate,
+                            address, civilStatus, elemSchool, elemSchoolSY, juniorHS, juniorHSSY, documentStatus,
+                            form137, form138, goodMoral, isApplied);
                 } else {
                     alertSQLRandomError();
                 }
@@ -244,5 +266,53 @@ public class SQL {
             }
         }
         return populatedAccount;
+    }
+
+    public static void SQLInsertIntoStudent(String lrn, String fullName, String phoneNumber, String strand, int age, String sex,
+                                            LocalDate birthdate, String address, String civilStatus, String elemSchool, String elemSY,
+                                            String juniorHS, String juniorHSSY, String documentStatus, boolean form137, boolean form138, boolean goodMoral) {
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+                String query = "UPDATE student SET lrn = ?, full_name = ?, phone_number = ?, strand = ?, age = ?, sex = ?, birthdate = ?, address = ?, civil_status = ?, elem_school = ?, elem_SY = ?, junior_hs = ?, junior_hs_SY = ?, document_status = ?, form_137 = ?, form_138 = ?, good_moral = ?, is_applied = 1 WHERE email = ?;";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, lrn);
+                preparedStatement.setString(2, fullName);
+                preparedStatement.setString(3, phoneNumber);
+                preparedStatement.setString(4, strand);
+                preparedStatement.setInt(5, age);
+                preparedStatement.setString(6, sex);
+                preparedStatement.setDate(7, Date.valueOf(birthdate));
+                preparedStatement.setString(8, address);
+                preparedStatement.setString(9, civilStatus);
+                preparedStatement.setString(10, elemSchool);
+                preparedStatement.setString(11, elemSY);
+                preparedStatement.setString(12, juniorHS);
+                preparedStatement.setString(13, juniorHSSY);
+                preparedStatement.setString(14, documentStatus);
+                preparedStatement.setBoolean(15, form137);
+                preparedStatement.setBoolean(16, form138);
+                preparedStatement.setBoolean(17, goodMoral);
+                preparedStatement.setString(18, referenceEmail);
+
+                preparedStatement.executeUpdate();
+            } else {
+                System.out.println("300");
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            System.out.println("304");
+            System.out.println(e.getMessage());
+            alertNoConnection();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }

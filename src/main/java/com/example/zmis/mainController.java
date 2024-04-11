@@ -9,6 +9,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,9 +30,12 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static com.example.zmis.Alerts.*;
@@ -90,19 +95,19 @@ public class mainController implements Initializable {
     private JFXCheckBox checkBoxGoodMoral;
 
     @FXML
-    private MFXLegacyComboBox<?> comboBoxCivilStatus;
+    private MFXTextField textFieldEmailAddress;
 
     @FXML
-    private MFXTextField comboBoxEmailAddress;
+    private MFXTextField textFieldPhoneNumber;
 
     @FXML
-    private MFXTextField comboBoxPhoneNumber;
+    private MFXLegacyComboBox<String> comboBoxCivilStatus;
 
     @FXML
-    private MFXLegacyComboBox<?> comboBoxSex;
+    private MFXLegacyComboBox<String> comboBoxSex;
 
     @FXML
-    private MFXLegacyComboBox<?> comboBoxStrand;
+    private MFXLegacyComboBox<String> comboBoxStrand;
 
     @FXML
     private DatePicker datePickerDateOfBirth;
@@ -203,10 +208,62 @@ public class mainController implements Initializable {
     private void initializeStudentAccount() {
         accountIsApplied = SQLStudentAccountIsApplied();
         if (accountIsApplied) {
-            account = new Account(referenceEmail);
-        } else {
             account = SQLPopulateAppliedAccount();
+        } else {
+            setComboBoxes();
+            setBirthdayPicker();
+            account = new Account(referenceEmail);
         }
+    }
+
+    private void setComboBoxes() {
+        ObservableList<String> observableListSex = FXCollections.observableArrayList(
+                "Male", "Female"
+        );
+        ObservableList<String> observableListStrand = FXCollections.observableArrayList(
+                "STEM", "ICT - Computer Programming", "ICT - CSS"
+        );
+        ObservableList<String> observableListCivilStatus = FXCollections.observableArrayList(
+                "Married", "Widowed", "Separated", "Divorced", "Single"
+        );
+
+        comboBoxSex.setItems(observableListSex);
+        comboBoxStrand.setItems(observableListStrand);
+        comboBoxCivilStatus.setItems(observableListCivilStatus);
+    }
+
+    private void setBirthdayPicker() {
+        StringConverter<LocalDate> converter = new StringConverter<>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    String month = String.format("%02d", date.getMonthValue());
+                    String day = String.format("%02d", date.getDayOfMonth());
+                    return month + "/" + day + "/" + date.getYear();
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        };
+        datePickerDateOfBirth.setConverter(converter);
+    }
+
+
+
+    @FXML
+    void datePickerDateOfBirthOnAction() {
+        setBirthdayPicker();
     }
 
     @FXML
@@ -283,7 +340,7 @@ public class mainController implements Initializable {
 
     @FXML
     void buttonSubmitApplicationOnAction() {
-
+        checkFieldsBeforeSubmit();
     }
 
     @FXML
@@ -409,7 +466,95 @@ public class mainController implements Initializable {
     }
 
     private void setEnroll() {
-        comboBoxEmailAddress.setText(referenceEmail);
-        comboBoxEmailAddress.setDisable(true);
+        textFieldEmailAddress.setText(referenceEmail);
+        textFieldEmailAddress.setDisable(true);
+    }
+
+    private void checkFieldsBeforeSubmit() {
+        boolean proceed;
+
+        String name = textFieldFullName.getText().trim();
+        String address = textFieldHomeAddress.getText().trim();
+        LocalDate birthdate = datePickerDateOfBirth.getValue();
+        String sex = comboBoxSex.getValue();
+        if (textFieldAge.getText().trim().isEmpty()) {
+            alertSomeFieldsAreBlankOrInvalid();
+        } else {
+            try {
+                int age = Integer.parseInt(textFieldAge.getText().trim());
+                if (age <= 0) {
+                    alertSomeFieldsAreBlankOrInvalid();
+                } else {
+                    String civilStatus = comboBoxCivilStatus.getValue();
+                    String strand = comboBoxStrand.getValue();
+                    String phoneNumber = textFieldPhoneNumber.getText().trim();
+                    String elemSchool = textFieldElementarySchool.getText().trim();
+                    String elemSchoolSY = textFieldElementarySchoolYearsAttended.getText().trim();
+                    String juniorHS = textFieldJuniorHighSchool.getText().trim();
+                    String juniorHSSY = textFieldJuniorHighSchoolYearsAttended.getText().trim();
+                    String lrn = textFieldLRN.getText().trim();
+                    boolean form137 = checkBoxForm137.isSelected();
+                    boolean form138 = checkBoxForm138.isSelected();
+                    boolean goodMoral = checkBoxGoodMoral.isSelected();
+
+                    if (name.isEmpty() || address.isEmpty() || !validBirthdate(birthdate) || sex.isEmpty() ||
+                            civilStatus.isEmpty() || strand.isEmpty() || phoneNumber.isEmpty() || elemSchool.isEmpty() || elemSchoolSY.isEmpty() ||
+                            juniorHS.isEmpty() || juniorHSSY.isEmpty() || lrn.isEmpty()) {
+                        alertSomeFieldsAreBlankOrInvalid();
+                        proceed = false;
+                    } else {
+                        proceed = true;
+                    }
+
+                    if (proceed) {
+                        SQLInsertIntoStudent(lrn, name, phoneNumber, strand, age, sex, birthdate, address, civilStatus, elemSchool, elemSchoolSY,
+                                juniorHS, juniorHSSY, getDocumentStatus(form137, form138, goodMoral), form137, form138, goodMoral);
+                        disableEnrollElements();
+                    }
+                }
+            } catch (NumberFormatException e) {
+                alertSomeFieldsAreBlankOrInvalid();
+            }
+        }
+    }
+
+    private boolean validBirthdate(LocalDate birthdate) {
+        if (String.valueOf(birthdate).isEmpty())
+            return false;
+
+        if (birthdate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            String formattedBirthdate = birthdate.format(formatter);
+
+            return formattedBirthdate.matches("^\\d{2}/\\d{2}/\\d{4}$");
+        } else {
+            return false;
+        }
+    }
+
+    private String getDocumentStatus(boolean form137, boolean form138, boolean goodMoral) {
+        return form137 && form138 && goodMoral ? "Complete" : "Incomplete";
+    }
+
+    private void disableEnrollElements() {
+        textFieldFullName.setDisable(true);
+        textFieldHomeAddress.setDisable(true);
+        datePickerDateOfBirth.setDisable(true);
+        comboBoxSex.setDisable(true);
+        textFieldAge.setDisable(true);
+        comboBoxCivilStatus.setDisable(true);
+        comboBoxStrand.setDisable(true);
+        textFieldPhoneNumber.setDisable(true);
+        textFieldElementarySchool.setDisable(true);
+        textFieldElementarySchoolYearsAttended.setDisable(true);
+        textFieldJuniorHighSchool.setDisable(true);
+        textFieldJuniorHighSchoolYearsAttended.setDisable(true);
+        textFieldLRN.setDisable(true);
+        checkBoxForm137.setDisable(true);
+        checkBoxForm138.setDisable(true);
+        checkBoxGoodMoral.setDisable(true);
+
+        buttonSubmitApplication.setDisable(true);
+        buttonSubmitApplication.setText("Application Submitted");
     }
 }

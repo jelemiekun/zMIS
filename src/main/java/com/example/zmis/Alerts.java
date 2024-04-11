@@ -72,4 +72,12 @@ public class Alerts {
         alert.setContentText("An unexpected error occurred. Please try again later.");
         alert.show();
     }
+
+    public static void alertSomeFieldsAreBlankOrInvalid() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Application Incomplete/Invalid");
+        alert.setContentText("Please fill in all required fields with valid inputs.");
+        alert.show();
+    }
 }

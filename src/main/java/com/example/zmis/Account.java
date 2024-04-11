@@ -7,6 +7,7 @@ public class Account {
     private String LRN;
     private String fullName;
     private String phoneNumber;
+    private String strand;
     private String section;
     private int age;
     private String sex;
@@ -24,11 +25,12 @@ public class Account {
     private boolean isApplied;
     private boolean isAccepted;
 
-    public Account(String email, String LRN, String fullName, String phoneNumber, String section, int age, String sex, LocalDate birthdate, String address, String civilStatus, String elemSchool, String elemSY, String juniorHS, String juniorHSSY, String documentStatus, boolean form137, boolean form138, boolean goodMoral, boolean isApplied) {
+    public Account(String email, String LRN, String fullName, String phoneNumber, String strand, String section, int age, String sex, LocalDate birthdate, String address, String civilStatus, String elemSchool, String elemSY, String juniorHS, String juniorHSSY, String documentStatus, boolean form137, boolean form138, boolean goodMoral, boolean isApplied) {
         this.email = email;
         this.LRN = LRN;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
+        this.strand = strand;
         this.section = section;
         this.age = age;
         this.sex = sex;

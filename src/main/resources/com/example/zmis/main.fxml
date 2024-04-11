@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,10 +18,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="725.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -20,7 +31,160 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="662.0" prefWidth="1318.0">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="662.0" stroke="BLACK" strokeType="INSIDE" width="1318.0" />
+                              <AnchorPane HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <AnchorPane fx:id="anchorPaneEnroll" onMouseClicked="#anchorPaneEnrollRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
+                                       <children>
+                                          <MFXTextField fx:id="textFieldFullName" floatingText="Full Name" layoutX="16.0" layoutY="91.0" prefHeight="58.0" prefWidth="600.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXTextField fx:id="textFieldHomeAddress" floatingText="Complete Home Address" layoutX="635.0" layoutY="91.0" prefHeight="58.0" prefWidth="670.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXTextField fx:id="textFieldLRN" floatingText="LRN" layoutX="740.0" layoutY="455.0" prefHeight="57.0" prefWidth="567.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXTextField fx:id="comboBoxPhoneNumber" floatingText="Phone Number" layoutX="636.0" layoutY="273.0" prefHeight="58.0" prefWidth="670.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXLegacyComboBox fx:id="comboBoxStrand" layoutX="973.0" layoutY="186.0" onAction="#comboBoxStrandOnAction" prefHeight="58.0" prefWidth="333.0" promptText="Strand" />
+                                          <Label layoutX="27.0" layoutY="67.0" text="First name                Middle name                Last name                Suffix" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <MFXTextField fx:id="textFieldAge" floatingText="Age" layoutX="437.0" layoutY="186.0" prefHeight="58.0" prefWidth="155.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXLegacyComboBox fx:id="comboBoxSex" layoutX="237.0" layoutY="186.0" onAction="#comboBoxSexOnAction" prefHeight="58.0" prefWidth="173.0" />
+                                          <MFXLegacyComboBox fx:id="comboBoxCivilStatus" layoutX="617.0" layoutY="186.0" onAction="#comboBoxCivilStatusOnAction" prefHeight="58.0" prefWidth="336.0" promptText="Civil Status" />
+                                          <MFXTextField fx:id="textFieldElementarySchool" floatingText="Elementary School" layoutX="13.0" layoutY="455.0" prefHeight="58.0" prefWidth="452.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXTextField fx:id="textFieldElementarySchoolYearsAttended" floatingText="Years Attended" layoutX="472.0" layoutY="455.0" prefHeight="58.0" prefWidth="200.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXTextField fx:id="textFieldJuniorHighSchool" floatingText="Junior High School" layoutX="13.0" layoutY="522.0" prefHeight="58.0" prefWidth="452.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXTextField fx:id="textFieldJuniorHighSchoolYearsAttended" floatingText="Years Attended" layoutX="472.0" layoutY="522.0" prefHeight="58.0" prefWidth="200.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <DatePicker fx:id="datePickerDateOfBirth" layoutX="18.0" layoutY="186.0" prefHeight="57.0" prefWidth="197.0" promptText="MM/DD/YYYY" />
+                                          <JFXCheckBox fx:id="checkBoxForm137" layoutX="830.0" layoutY="522.0" onAction="#checkBoxEnrollOnAction" text="Form 137">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="checkBoxForm138" layoutX="970.0" layoutY="522.0" onAction="#checkBoxEnrollOnAction" text="Form 138">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="checkBoxGoodMoral" layoutX="1109.0" layoutY="522.0" onAction="#checkBoxEnrollOnAction" text="Good Moral">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <Label layoutX="27.0" layoutY="162.0" text="Date of birth" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="245.0" layoutY="162.0" text="Sex" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <MFXTextField fx:id="comboBoxEmailAddress" allowEdit="false" floatingText="Email Address" layoutX="17.0" layoutY="273.0" prefHeight="58.0" prefWidth="600.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXButton fx:id="buttonSubmitApplication" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL3" layoutX="1070.0" layoutY="590.0" onAction="#buttonSubmitApplicationOnAction" prefHeight="58.0" prefWidth="240.0" rippleColor="#0f9d58" text="Submit Application">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="20.0" />
+                                             </font>
+                                          </MFXButton>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutX="14.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1290.0" />
+                                          <Label layoutX="510.0" layoutY="10.0" text="PERSONAL INFORMATION" textFill="YELLOW">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutX="12.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="661.0" />
+                                          <Label layoutX="150.0" layoutY="377.0" text="EDUCATIONAL BACKGROUND" textFill="YELLOW">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutX="740.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="567.0" />
+                                          <Label layoutX="915.0" layoutY="377.0" text="REQUIREMENTS" textFill="YELLOW">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="25.0" layoutY="431.0" text="Name of School" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="483.0" layoutY="431.0" text="(YYYY-YYYY)" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="595.0" layoutY="434.0" text="ex. (2011-2018)" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="anchorPaneEnrolled" onMouseClicked="#anchorPaneEnrolledRequestFocus" prefHeight="662.0" prefWidth="1310.0">
+                                       <children>
+                                          <MFXTextField fx:id="textFieldSearchEnrolled" borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="76.0" measureUnitGap="0.0" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="38.0" layoutY="5.0" onMouseClicked="#buttonImageViewSearchEnrolled" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@search.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                          <TableView fx:id="tableViewEnrolled" layoutY="54.0" prefHeight="606.0" prefWidth="1310.0">
+                                            <columns>
+                                              <TableColumn fx:id="tableViewEnrolledColumnFullName" prefWidth="75.0" text="C1" />
+                                              <TableColumn fx:id="tableViewEnrolledColumnStrand" prefWidth="75.0" text="C2" />
+                                                <TableColumn fx:id="tableViewEnrolledColumnSection" prefWidth="1158.0" text="Column X" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </HBox>
                      </children>
@@ -33,63 +197,91 @@
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox alignment="CENTER" prefHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="140.0" />
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="75.0" prefWidth="450.0" style="-fx-background-color: #1f3bff;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="75.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ImageView fitHeight="64.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="55.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@logo.png" />
                                  </image>
                               </ImageView>
-                           </children></HBox>
+                              <Label text="UMAK" textFill="YELLOW">
+                                 <font>
+                                    <Font name="Gill Sans Ultra Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="800.0" HBox.hgrow="ALWAYS" />
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="75.0" prefWidth="800.0" style="-fx-background-color: #1f3bff;" />
+                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
                            <children>
-                              <JFXButton prefHeight="88.0" prefWidth="140.0" text="Enroll" />
+                              <JFXButton fx:id="buttonNavDashboard" onAction="#buttonNavDashboardOnAction" prefHeight="88.0" prefWidth="140.0" text="Dashboard" textFill="WHITE">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="20.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
                            <children>
-                              <JFXButton prefHeight="88.0" prefWidth="140.0" text="Schedule" />
+                              <JFXButton fx:id="buttonNavEnroll" onAction="#buttonNavEnrollOnAction" prefHeight="88.0" prefWidth="140.0" text="Enroll" textFill="YELLOW">
+                                 <font>
+                                    <Font name="Gill Sans MT Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
                            <children>
-                              <JFXButton prefHeight="88.0" prefWidth="140.0" text="Enrolled" />
+                              <JFXButton fx:id="buttonNavEnrolled" onAction="#buttonNavEnrolledOnAction" prefHeight="88.0" prefWidth="140.0" text="Enrolled" textFill="WHITE">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="20.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
                            <children>
-                              <JFXButton prefHeight="88.0" prefWidth="140.0" text="Contact Us" />
+                              <JFXButton fx:id="buttonNavContactUs" onAction="#buttonNavContactUsOnAction" prefHeight="88.0" prefWidth="140.0" text="Contact Us" textFill="WHITE">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="20.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
                            <children>
-                              <JFXButton prefHeight="88.0" prefWidth="140.0" text="Log out" />
+                              <JFXButton fx:id="buttonNavLogOut" onAction="#buttonNavLogOutOnAction" prefHeight="88.0" prefWidth="140.0" text="Log out" textFill="WHITE">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="20.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </HBox>
                      </children>

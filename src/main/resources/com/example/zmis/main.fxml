@@ -8,6 +8,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -267,7 +268,55 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="anchorPaneContactUs" onMouseClicked="#anchorPaneContactUsRequestFocus" prefHeight="662.0" prefWidth="1310.0" />
+                                    <AnchorPane fx:id="anchorPaneContactUs" onMouseClicked="#anchorPaneContactUsRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
+                                       <children>
+                                          <VBox fx:id="vBoxMap" layoutX="492.0" prefHeight="662.0" prefWidth="818.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px;" />
+                                          <Label layoutY="14.0" text="Mailing Address:" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="18.0" />
+                                             </font></Label>
+                                          <Label layoutY="41.0" prefWidth="470.0" text="JP Rizal Extension, West Rembo,  City of Taguig, Metro Manila, 1644, Philippines" wrapText="true">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutY="141.0" text="Legacy Address:" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutY="168.0" prefWidth="470.0" text="JP Rizal Extn., West Rembo, Makati City, 1215, Metro Manila, Philippines" wrapText="true">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutY="583.0" prefWidth="459.0" text="Offices are open from Mondays to Fridays8:00 AM to 5:00 PM GMT +8 (Closed on Holidays)" wrapText="true">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutY="260.0" text="Email Address:" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutY="287.0" prefWidth="470.0" text="info@umak.edu.ph" wrapText="true">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutY="354.0" text="Website:" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Hyperlink fx:id="hyperLinkWebsite" ellipsisString="" layoutY="376.0" prefHeight="39.0" prefWidth="161.0" text="umak.edu.ph" textFill="#0066ff" underline="true">
+                                             <font>
+                                                <Font name="Gill Sans MT Bold" size="24.0" />
+                                             </font>
+                                          </Hyperlink>
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </children>

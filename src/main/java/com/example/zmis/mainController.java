@@ -1,5 +1,8 @@
 package com.example.zmis;
 
+import com.gluonhq.maps.MapLayer;
+import com.gluonhq.maps.MapPoint;
+import com.gluonhq.maps.MapView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -7,14 +10,25 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
-public class mainController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class mainController implements Initializable {
 
     @FXML
     private AnchorPane anchorPaneContactUs;
@@ -72,6 +86,9 @@ public class mainController {
 
     @FXML
     private DatePicker datePickerDateOfBirth;
+
+    @FXML
+    private Hyperlink hyperLinkWebsite;
 
     @FXML
     private Label labelDashboardApplicantsCounter;
@@ -141,6 +158,14 @@ public class mainController {
 
     @FXML
     private MFXTextField textFieldSearchEnrolled;
+
+    @FXML
+    private VBox vBoxMap;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        createMapview();
+    }
 
     @FXML
     void anchorPaneContactUsRequestFocus(MouseEvent event) {
@@ -230,6 +255,34 @@ public class mainController {
     @FXML
     void tableViewDashBoardEnrolledClicked(MouseEvent event) {
 
+    }
+
+
+
+    // Map
+    private static final MapPoint mapPoint = new MapPoint(14.56378, 121.05670);
+    private void createMapview() {
+        MapView mapView = new MapView();
+        mapView.setPrefSize(600, 600);
+        mapView.addLayer(new CustomMapLayer());
+        mapView.setZoom(16.5);
+        mapView.setCenter(mapPoint);
+        vBoxMap.getChildren().add(mapView);
+        VBox.setVgrow(mapView, Priority.ALWAYS);
+    }
+    private class CustomMapLayer extends MapLayer {
+        private final Node marker;
+        public CustomMapLayer() {
+            marker = new Circle(7, Color.RED);
+            getChildren().add(marker);
+        }
+
+        @Override
+        protected  void layoutLayer() {
+            Point2D point = getMapPoint(mapPoint.getLatitude(), mapPoint.getLongitude());
+            marker.setTranslateX(point.getX());
+            marker.setTranslateY(point.getY());
+        }
     }
 
 }

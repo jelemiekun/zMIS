@@ -180,12 +180,29 @@
             <artifactId>core</artifactId>
             <version>9.0.0</version>
         </dependency>
-        <!-- Gluon Maps -->
+        <!-- https://mvnrepository.com/artifact/com.gluonhq/maps -->
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>maps</artifactId>
-            <version>${version}</version>
+            <version>2.0.0-ea+5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.gluonhq.attach/util -->
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>4.0.20</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.gluonhq.attach/storage -->
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>storage</artifactId>
+            <version>4.0.20</version>
+            <scope>runtime</scope>
+        </dependency>
+
+
+
 
     </dependencies>
 

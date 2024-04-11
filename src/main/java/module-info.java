@@ -4,6 +4,7 @@ module com.example.zmis {
     requires java.sql;
     requires com.zaxxer.hikari;
     requires com.jfoenix;
+    requires com.gluonhq.maps;
     requires MaterialFX;
 
 

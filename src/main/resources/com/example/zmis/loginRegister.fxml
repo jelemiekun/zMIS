@@ -29,7 +29,7 @@
                                           <HBox prefHeight="35.0" prefWidth="600.0" />
                                           <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@logo.jpg" />
+                                                <Image url="@logo.png" />
                                              </image>
                                           </ImageView>
                                           <Label text="zMIS" />

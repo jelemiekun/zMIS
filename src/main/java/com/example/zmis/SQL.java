@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import static com.example.zmis.Alerts.*;
 import static com.example.zmis.loginRegisterController.*;
@@ -298,12 +300,9 @@ public class SQL {
 
                 preparedStatement.executeUpdate();
             } else {
-                System.out.println("300");
                 alertNoConnection();
             }
         } catch (SQLException e) {
-            System.out.println("304");
-            System.out.println(e.getMessage());
             alertNoConnection();
         } finally {
             if (connection != null) {
@@ -314,5 +313,42 @@ public class SQL {
                 }
             }
         }
+    }
+
+    public static ObservableList<Account> SQLPopulateTableViewEnrolled() {
+        ObservableList<Account> accountObservableList = FXCollections.observableArrayList();
+
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+                String query = "SELECT full_name, strand, section FROM student where is_accepted = 1;";
+                preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    String fullName = resultSet.getString("full_name");
+                    String strand = resultSet.getString("strand");
+                    String section = resultSet.getString("section");
+
+                    Account account = new Account(fullName, strand, section);
+                    accountObservableList.add(account);
+                }
+            } else {
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return accountObservableList;
     }
 }

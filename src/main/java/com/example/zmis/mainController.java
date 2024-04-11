@@ -24,6 +24,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -45,6 +46,7 @@ import static com.example.zmis.loginRegisterController.*;
 public class mainController implements Initializable {
     private Account account;
     private boolean accountIsApplied;
+    private ObservableList<Account> accountObservableListEnrolled = FXCollections.observableArrayList();
 
     @FXML
     private HBox hBoxNavigationBar;
@@ -146,16 +148,16 @@ public class mainController implements Initializable {
     private TableColumn<?, ?> tableViewDashBoardEnrolledColumnFullName;
 
     @FXML
-    private TableView<?> tableViewEnrolled;
+    private TableView<Account> tableViewEnrolled;
 
     @FXML
-    private TableColumn<?, ?> tableViewEnrolledColumnFullName;
+    private TableColumn<Account, String> tableViewEnrolledColumnFullName;
 
     @FXML
-    private TableColumn<?, ?> tableViewEnrolledColumnSection;
+    private TableColumn<Account, String> tableViewEnrolledColumnSection;
 
     @FXML
-    private TableColumn<?, ?> tableViewEnrolledColumnStrand;
+    private TableColumn<Account, String> tableViewEnrolledColumnStrand;
 
     @FXML
     private MFXTextField textFieldAge;
@@ -195,6 +197,7 @@ public class mainController implements Initializable {
         if (startUpPane == 1)  {
             hBoxNavigationBar.getChildren().remove(anchorPaneEnrollNavigation);
         } else {
+            setEnrolledTable();
             buttonNavDashboard.setText("");
             buttonNavDashboard.setDisable(true);
             initializeStudentAccount();
@@ -205,10 +208,23 @@ public class mainController implements Initializable {
         Platform.runLater(() -> borderPaneMain.requestFocus());
     }
 
+    private void setEnrolledTable() {
+        tableViewEnrolled.setItems(accountObservableListEnrolled);
+        tableViewEnrolledColumnFullName.setReorderable(false);
+        tableViewEnrolledColumnStrand.setReorderable(false);
+        tableViewEnrolledColumnSection.setReorderable(false);
+
+        tableViewEnrolledColumnFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        tableViewEnrolledColumnStrand.setCellValueFactory(new PropertyValueFactory<>("strand"));
+        tableViewEnrolledColumnSection.setCellValueFactory(new PropertyValueFactory<>("section"));
+    }
+
     private void initializeStudentAccount() {
         accountIsApplied = SQLStudentAccountIsApplied();
         if (accountIsApplied) {
             account = SQLPopulateAppliedAccount();
+            setAccountEnrollValues();
+            disableEnrollElements();
         } else {
             setComboBoxes();
             setBirthdayPicker();
@@ -448,6 +464,8 @@ public class mainController implements Initializable {
                 anchorPaneEnroll.setVisible(false);
                 anchorPaneEnrolled.setVisible(true);
                 anchorPaneContactUs.setVisible(false);
+
+                loadEnrolledTable();
                 break;
             case 4: // contact us
                 createMapview();
@@ -536,6 +554,24 @@ public class mainController implements Initializable {
         return form137 && form138 && goodMoral ? "Complete" : "Incomplete";
     }
 
+    private void setAccountEnrollValues() {
+        textFieldFullName.setText(account.getFullName());
+        textFieldHomeAddress.setText(account.getAddress());
+        datePickerDateOfBirth.setValue(account.getBirthdate());
+        comboBoxSex.setValue(account.getSex());
+        textFieldAge.setText(String.valueOf(account.getAge()));
+        comboBoxCivilStatus.setValue(account.getCivilStatus());
+        comboBoxStrand.setValue(account.getStrand());
+        textFieldPhoneNumber.setText(account.getPhoneNumber());
+        textFieldElementarySchool.setText(account.getElemSchool());
+        textFieldJuniorHighSchool.setText(account.getJuniorHS());
+        textFieldJuniorHighSchoolYearsAttended.setText(account.getJuniorHSSY());
+        textFieldLRN.setText(account.getLRN());
+        checkBoxForm137.setSelected(account.isForm137());
+        checkBoxForm138.setSelected(account.isForm138());
+        checkBoxGoodMoral.setSelected(account.isGoodMoral());
+    }
+
     private void disableEnrollElements() {
         textFieldFullName.setDisable(true);
         textFieldHomeAddress.setDisable(true);
@@ -556,5 +592,11 @@ public class mainController implements Initializable {
 
         buttonSubmitApplication.setDisable(true);
         buttonSubmitApplication.setText("Application Submitted");
+    }
+
+    private void loadEnrolledTable() {
+        accountObservableListEnrolled = SQLPopulateTableViewEnrolled();
+        tableViewEnrolled.setItems(accountObservableListEnrolled);
+        tableViewEnrolled.refresh();
     }
 }

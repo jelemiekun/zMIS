@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -118,7 +118,7 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="anchorPaneEnroll" onMouseClicked="#anchorPaneEnrollRequestFocus" prefHeight="662.0" prefWidth="1310.0">
+                                    <AnchorPane fx:id="anchorPaneEnroll" onMouseClicked="#anchorPaneEnrollRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
                                        <children>
                                           <MFXTextField fx:id="textFieldFullName" floatingText="Full Name" layoutX="16.0" layoutY="91.0" prefHeight="58.0" prefWidth="600.0">
                                              <font>

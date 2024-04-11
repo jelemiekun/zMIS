@@ -48,7 +48,97 @@ public class Account {
         this.isApplied = isApplied;
     }
 
+    public Account(String fullName, String strand, String section) {
+        this.fullName = fullName;
+        this.strand = strand;
+        this.section = section;
+    }
+
     public Account(String email) {
         this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLRN() {
+        return LRN;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getStrand() {
+        return strand;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCivilStatus() {
+        return civilStatus;
+    }
+
+    public String getElemSchool() {
+        return elemSchool;
+    }
+
+    public String getElemSY() {
+        return elemSY;
+    }
+
+    public String getJuniorHS() {
+        return juniorHS;
+    }
+
+    public String getJuniorHSSY() {
+        return juniorHSSY;
+    }
+
+    public String getDocumentStatus() {
+        return documentStatus;
+    }
+
+    public boolean isForm137() {
+        return form137;
+    }
+
+    public boolean isForm138() {
+        return form138;
+    }
+
+    public boolean isGoodMoral() {
+        return goodMoral;
+    }
+
+    public boolean isApplied() {
+        return isApplied;
+    }
+
+    public boolean isAccepted() {
+        return isAccepted;
     }
 }

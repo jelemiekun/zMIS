@@ -8,27 +8,44 @@ import com.jfoenix.controls.JFXCheckBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.zmis.Alerts.*;
+import static com.example.zmis.loginRegisterController.*;
+
 public class mainController implements Initializable {
+
+    @FXML
+    private HBox hBoxNavigationBar;
+
+    @FXML
+    private BorderPane borderPaneMain;
+
+    @FXML
+    private AnchorPane anchorPaneEnrollNavigation;
 
     @FXML
     private AnchorPane anchorPaneContactUs;
@@ -164,61 +181,95 @@ public class mainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        createMapview();
+
+        int startUpPane = isAdmin ? 1 : 2;
+
+        if (startUpPane == 1)  {
+            hBoxNavigationBar.getChildren().remove(anchorPaneEnrollNavigation);
+        } else {
+            buttonNavDashboard.setText("");
+            buttonNavDashboard.setDisable(true);
+        }
+
+        switchPane(startUpPane);
+
+        Platform.runLater(() -> borderPaneMain.requestFocus());
     }
 
     @FXML
-    void anchorPaneContactUsRequestFocus(MouseEvent event) {
+    void anchorPaneContactUsRequestFocus() {
+        anchorPaneContactUs.requestFocus();
+    }
+
+    @FXML
+    void anchorPaneDashboardRequestFocus() {
+        anchorPaneDashboard.requestFocus();
+    }
+
+    @FXML
+    void anchorPaneEnrollRequestFocus() {
+        anchorPaneEnroll.requestFocus();
+    }
+
+    @FXML
+    void anchorPaneEnrolledRequestFocus() {
+        anchorPaneEnrolled.requestFocus();
+    }
+
+    @FXML
+    void buttonNavLogOutOnAction() {
+        if (alertConfirmLogout()) {
+            try {
+                goToLogin();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void goToLogin() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/zmis/loginRegister.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
+        stage.getIcons().add(logo);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage thisStage = (Stage) buttonNavLogOut.getScene().getWindow();
+        thisStage.close();
+        isAdmin = false;
+        referenceEmail = "";
+    }
+
+    @FXML
+    void buttonImageViewSearchEnrolled() {
 
     }
 
     @FXML
-    void anchorPaneDashboardRequestFocus(MouseEvent event) {
-
+    void buttonNavContactUsOnAction() {
+        switchPane(4);
     }
 
     @FXML
-    void anchorPaneEnrollRequestFocus(MouseEvent event) {
-
+    void buttonNavDashboardOnAction() {
+        switchPane(1);
     }
 
     @FXML
-    void anchorPaneEnrolledRequestFocus(MouseEvent event) {
-
+    void buttonNavEnrollOnAction() {
+        switchPane(2);
     }
 
     @FXML
-    void buttonImageViewSearchEnrolled(MouseEvent event) {
-
+    void buttonNavEnrolledOnAction() {
+        switchPane(3);
     }
 
     @FXML
-    void buttonNavContactUsOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void buttonNavDashboardOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void buttonNavEnrollOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void buttonNavEnrolledOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void buttonNavLogOutOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void buttonSubmitApplicationOnAction(ActionEvent event) {
+    void buttonSubmitApplicationOnAction() {
 
     }
 
@@ -262,15 +313,18 @@ public class mainController implements Initializable {
     // Map
     private static final MapPoint mapPoint = new MapPoint(14.56378, 121.05670);
     private void createMapview() {
-        MapView mapView = new MapView();
-        mapView.setPrefSize(600, 600);
-        mapView.addLayer(new CustomMapLayer());
-        mapView.setZoom(16.5);
-        mapView.setCenter(mapPoint);
-        vBoxMap.getChildren().add(mapView);
-        VBox.setVgrow(mapView, Priority.ALWAYS);
+        Platform.runLater(() -> {
+            vBoxMap.getChildren().clear();
+            MapView mapView = new MapView();
+            mapView.setPrefSize(600, 600);
+            mapView.addLayer(new CustomMapLayer());
+            mapView.setZoom(16.5);
+            mapView.setCenter(mapPoint);
+            vBoxMap.getChildren().add(mapView);
+            VBox.setVgrow(mapView, Priority.ALWAYS);
+        });
     }
-    private class CustomMapLayer extends MapLayer {
+    private static class CustomMapLayer extends MapLayer {
         private final Node marker;
         public CustomMapLayer() {
             marker = new Circle(7, Color.RED);
@@ -285,4 +339,64 @@ public class mainController implements Initializable {
         }
     }
 
+    private void switchPane(int paneNumber) {
+        switch (paneNumber) {
+            case 1: // dashboard
+                buttonNavDashboard.setStyle("-fx-text-fill: #ffff00;");
+                buttonNavEnroll.setStyle("-fx-text-fill: #ffffff;");
+                buttonNavEnrolled.setStyle("-fx-text-fill: #ffffff");
+                buttonNavContactUs.setStyle("-fx-text-fill: #ffffff");
+                buttonNavLogOut.setStyle("-fx-text-fill: #ffffff");
+
+                anchorPaneDashboard.setVisible(true);
+                anchorPaneEnroll.setVisible(false);
+                anchorPaneEnrolled.setVisible(false);
+                anchorPaneContactUs.setVisible(false);
+                break;
+            case 2: // enroll
+                buttonNavDashboard.setStyle("-fx-text-fill: #ffffff;");
+                buttonNavEnroll.setStyle("-fx-text-fill: #ffff00;");
+                buttonNavEnrolled.setStyle("-fx-text-fill: #ffffff");
+                buttonNavContactUs.setStyle("-fx-text-fill: #ffffff");
+                buttonNavLogOut.setStyle("-fx-text-fill: #ffffff");
+
+                anchorPaneDashboard.setVisible(false);
+                anchorPaneEnroll.setVisible(true);
+                anchorPaneEnrolled.setVisible(false);
+                anchorPaneContactUs.setVisible(false);
+
+                setEnroll();
+                break;
+            case 3: // enrolled
+                buttonNavDashboard.setStyle("-fx-text-fill: #ffffff;");
+                buttonNavEnroll.setStyle("-fx-text-fill: #ffffff;");
+                buttonNavEnrolled.setStyle("-fx-text-fill: #ffff00");
+                buttonNavContactUs.setStyle("-fx-text-fill: #ffffff");
+                buttonNavLogOut.setStyle("-fx-text-fill: #ffffff");
+
+                anchorPaneDashboard.setVisible(false);
+                anchorPaneEnroll.setVisible(false);
+                anchorPaneEnrolled.setVisible(true);
+                anchorPaneContactUs.setVisible(false);
+                break;
+            case 4: // contact us
+                createMapview();
+                buttonNavDashboard.setStyle("-fx-text-fill: #ffffff;");
+                buttonNavEnroll.setStyle("-fx-text-fill: #ffffff;");
+                buttonNavEnrolled.setStyle("-fx-text-fill: #ffffff");
+                buttonNavContactUs.setStyle("-fx-text-fill: #ffff00");
+                buttonNavLogOut.setStyle("-fx-text-fill: #ffffff");
+
+                anchorPaneDashboard.setVisible(false);
+                anchorPaneEnroll.setVisible(false);
+                anchorPaneEnrolled.setVisible(false);
+                anchorPaneContactUs.setVisible(true);
+                break;
+        }
+    }
+
+    private void setEnroll() {
+        comboBoxEmailAddress.setText(referenceEmail);
+        comboBoxEmailAddress.setDisable(true);
+    }
 }

@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -331,7 +331,7 @@
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox fx:id="hBoxNavigationBar" alignment="CENTER" prefHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #1f3bff;">
                      <children>
@@ -368,7 +368,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane fx:id="anchorPaneEnrollNavigation" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>

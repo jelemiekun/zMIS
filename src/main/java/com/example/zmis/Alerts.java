@@ -2,6 +2,9 @@ package com.example.zmis;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class Alerts {
     public static void alertNoConnection() {
@@ -42,5 +45,23 @@ public class Alerts {
         alert.setHeaderText("Duplicate email registration");
         alert.setContentText("Email already registered. Please use a different email.");
         alert.show();
+    }
+
+    public static boolean alertConfirmLogout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Confirm log-out?");
+        alert.setContentText("Select 'yes' to log-out and 'no' to stay logged-in.");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonTypeYes) {
+            return true; // clicked 'yes'
+        } else {
+            return false; // clicked 'no'
+        }
     }
 }

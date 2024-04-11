@@ -24,6 +24,8 @@ import static com.example.zmis.Alerts.*;
 import static com.example.zmis.SQL.*;
 
 public class loginRegisterController implements Initializable {
+    public static boolean isAdmin = false;
+    public static String referenceEmail = "";
 
     @FXML
     private AnchorPane anchorPaneOperation;

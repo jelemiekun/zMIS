@@ -6,6 +6,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import static com.example.zmis.Alerts.*;
+import static com.example.zmis.loginRegisterController.*;
 
 public class SQL {
     private static HikariConfig config = new HikariConfig();
@@ -37,12 +38,14 @@ public class SQL {
                 String query = "SELECT password FROM login_register where email = ?";
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, email);
-
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 if (resultSet.next()) {
                     String dbPassword = resultSet.getString("password");
-                    return dbPassword.equals(password);
+                    boolean proceed = dbPassword.equals(password);
+                    SQLCheckIfAdmin(email);
+                    referenceEmail = email;
+                    return proceed;
                 }
                 alertIncorrectCredentials();
                 return false;
@@ -53,6 +56,29 @@ public class SQL {
         } catch (SQLException e) {
             alertNoConnection();
             return false;
+        }
+    }
+
+    private static void SQLCheckIfAdmin(String email) {
+        try {
+            if (dataSource != null) {
+                Connection connection = dataSource.getConnection();
+
+                String query = "SELECT credentials_id FROM login_register WHERE email = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, email);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    int dbCredentialsID = resultSet.getInt("credentials_id");
+                    if (dbCredentialsID == 1)
+                        isAdmin = true;
+                }
+            } else {
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
         }
     }
 

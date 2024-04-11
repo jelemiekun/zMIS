@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 
 import static com.example.zmis.Alerts.*;
 import static com.example.zmis.loginRegisterController.*;
+import static com.example.zmis.mainController.full_name;
 
 public class SQL {
     private static HikariConfig config = new HikariConfig();
@@ -222,6 +223,64 @@ public class SQL {
                 String query = "SELECT * FROM student WHERE email = ?";
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, referenceEmail);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    String email = resultSet.getString("email");
+                    String lrn = resultSet.getString("LRN");
+                    String fullName = resultSet.getString("full_name");
+                    String phoneNumber = resultSet.getString("phone_number");
+                    String strand = resultSet.getString("strand");
+                    String section = resultSet.getString("section");
+                    int age = resultSet.getInt("age");
+                    String sex = resultSet.getString("sex");
+                    LocalDate birthdate = LocalDate.parse(resultSet.getString("birthdate"));
+                    String address = resultSet.getString("address");
+                    String civilStatus = resultSet.getString("civil_status");
+                    String elemSchool = resultSet.getString("elem_school");
+                    String elemSchoolSY = resultSet.getString("elem_SY");
+                    String juniorHS = resultSet.getString("junior_hs");
+                    String juniorHSSY = resultSet.getString("junior_hs_SY");
+                    String documentStatus = resultSet.getString("document_status");
+                    boolean form137 = resultSet.getInt("form_137") == 1;
+                    boolean form138 = resultSet.getInt("form_138") == 1;
+                    boolean goodMoral = resultSet.getInt("good_moral") == 1;
+                    boolean isApplied = resultSet.getInt("is_applied") == 1;
+
+                    populatedAccount = new Account(email, lrn, fullName, phoneNumber, strand, section, age, sex, birthdate,
+                            address, civilStatus, elemSchool, elemSchoolSY, juniorHS, juniorHSSY, documentStatus,
+                            form137, form138, goodMoral, isApplied);
+                } else {
+                    alertSQLRandomError();
+                }
+            } else {
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return populatedAccount;
+    }
+
+    public static Account SQLPopulateApplicationSelected() {
+        Account populatedAccount = null;
+
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+                String query = "SELECT * FROM student WHERE full_name = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, full_name);
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 

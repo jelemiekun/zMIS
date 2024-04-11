@@ -43,6 +43,7 @@ import static com.example.zmis.SQL.*;
 import static com.example.zmis.loginRegisterController.*;
 
 public class mainController implements Initializable {
+    public static String full_name = "";
     private Account account;
     private boolean accountIsApplied;
     private ObservableList<Account> accountObservableListEnrolled = FXCollections.observableArrayList();
@@ -247,6 +248,8 @@ public class mainController implements Initializable {
         tableViewDashBoardApplicants.refresh();
         tableViewDashBoardEnrolled.refresh();
         tableViewDashBoardDeclined.refresh();
+
+        setDashboardCounters();
     }
 
     private void setEnrolledTable() {
@@ -333,6 +336,9 @@ public class mainController implements Initializable {
     @FXML
     void anchorPaneDashboardRequestFocus() {
         anchorPaneDashboard.requestFocus();
+        tableViewDashBoardApplicants.getSelectionModel().clearSelection();
+        tableViewDashBoardEnrolled.getSelectionModel().clearSelection();
+        tableViewDashBoardDeclined.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -405,27 +411,39 @@ public class mainController implements Initializable {
     @FXML
     void tableViewDashBoardApplicantsClicked(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            openFromDashboard = 1;
-            openFromDashboardFXML();
-            tableViewDashBoardApplicants.getSelectionModel().clearSelection();
+            Account selectedAccount = tableViewDashBoardApplicants.getSelectionModel().getSelectedItem();
+            if (selectedAccount != null) {
+                full_name = selectedAccount.getFullName();
+                openFromDashboard = 1;
+                openFromDashboardFXML();
+                tableViewDashBoardApplicants.getSelectionModel().clearSelection();
+            }
         }
     }
 
     @FXML
     void tableViewDashBoardDeclinedClicked(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            openFromDashboard = 2;
-            openFromDashboardFXML();
-            tableViewDashBoardDeclined.getSelectionModel().clearSelection();
+            Account selectedAccount = tableViewDashBoardDeclined.getSelectionModel().getSelectedItem();
+            if (selectedAccount != null) {
+                full_name = selectedAccount.getFullName();
+                openFromDashboard = 2;
+                openFromDashboardFXML();
+                tableViewDashBoardDeclined.getSelectionModel().clearSelection();
+            }
         }
     }
 
     @FXML
     void tableViewDashBoardEnrolledClicked(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            openFromDashboard = 3;
-            openFromDashboardFXML();
-            tableViewDashBoardEnrolled.getSelectionModel().clearSelection();
+            Account selectedAccount = tableViewDashBoardEnrolled.getSelectionModel().getSelectedItem();
+            if (selectedAccount != null) {
+                full_name = selectedAccount.getFullName();
+                openFromDashboard = 3;
+                openFromDashboardFXML();
+                tableViewDashBoardEnrolled.getSelectionModel().clearSelection();
+            }
         }
     }
 
@@ -475,7 +493,6 @@ public class mainController implements Initializable {
                 anchorPaneContactUs.setVisible(false);
 
                 setDashboardTableContents();
-                setDashboardCounters();
                 break;
             case 2: // enroll
                 buttonNavDashboard.setStyle("-fx-text-fill: #ffffff;");
@@ -656,6 +673,7 @@ public class mainController implements Initializable {
         stage.showAndWait();
 
         anchorPaneDashboardRequestFocus();
-
+        setDashboardTableContents();
+        full_name = "";
     }
 }

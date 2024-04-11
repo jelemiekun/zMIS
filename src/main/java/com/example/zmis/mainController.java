@@ -11,7 +11,6 @@ import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,6 +46,11 @@ public class mainController implements Initializable {
     private Account account;
     private boolean accountIsApplied;
     private ObservableList<Account> accountObservableListEnrolled = FXCollections.observableArrayList();
+    private ObservableList<Account> accountApplicantsObservableListEnrolled = FXCollections.observableArrayList();
+    private ObservableList<Account> accountEnrolledObservableListEnrolled = FXCollections.observableArrayList();
+    private ObservableList<Account> accountDeclinedObservableListEnrolled = FXCollections.observableArrayList();
+
+    public static int openFromDashboard = 1;
 
     @FXML
     private HBox hBoxNavigationBar;
@@ -127,25 +131,25 @@ public class mainController implements Initializable {
     private Label labelDashboardEnrolledCounter;
 
     @FXML
-    private TableView<?> tableViewDashBoardApplicants;
+    private TableView<Account> tableViewDashBoardApplicants;
 
     @FXML
-    private TableColumn<?, ?> tableViewDashBoardApplicantsColumnFullName;
+    private TableColumn<Account, String> tableViewDashBoardApplicantsColumnFullName;
 
     @FXML
-    private TableColumn<?, ?> tableViewDashBoardApplicantsColumnStatus;
+    private TableColumn<Account, String> tableViewDashBoardApplicantsColumnStatus;
 
     @FXML
-    private TableView<?> tableViewDashBoardDeclined;
+    private TableView<Account> tableViewDashBoardDeclined;
 
     @FXML
-    private TableColumn<?, ?> tableViewDashBoardDeclinedColumnFullName;
+    private TableColumn<Account, String> tableViewDashBoardDeclinedColumnFullName;
 
     @FXML
-    private TableView<?> tableViewDashBoardEnrolled;
+    private TableView<Account> tableViewDashBoardEnrolled;
 
     @FXML
-    private TableColumn<?, ?> tableViewDashBoardEnrolledColumnFullName;
+    private TableColumn<Account, String> tableViewDashBoardEnrolledColumnFullName;
 
     @FXML
     private TableView<Account> tableViewEnrolled;
@@ -184,9 +188,6 @@ public class mainController implements Initializable {
     private MFXTextField textFieldLRN;
 
     @FXML
-    private MFXTextField textFieldSearchEnrolled;
-
-    @FXML
     private VBox vBoxMap;
 
     @Override
@@ -196,16 +197,56 @@ public class mainController implements Initializable {
 
         if (startUpPane == 1)  {
             hBoxNavigationBar.getChildren().remove(anchorPaneEnrollNavigation);
+            setDashboardContent();
         } else {
-            setEnrolledTable();
             buttonNavDashboard.setText("");
             buttonNavDashboard.setDisable(true);
             initializeStudentAccount();
         }
 
+        setEnrolledTable();
         switchPane(startUpPane);
 
         Platform.runLater(() -> borderPaneMain.requestFocus());
+    }
+
+    private void setDashboardContent() {
+        initializeDashboardTables();
+    }
+
+    private void initializeDashboardTables() {
+        tableViewDashBoardApplicants.setItems(accountApplicantsObservableListEnrolled);
+        tableViewDashBoardApplicantsColumnFullName.setReorderable(false);
+        tableViewDashBoardApplicantsColumnStatus.setReorderable(false);
+
+        tableViewDashBoardApplicantsColumnFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        tableViewDashBoardApplicantsColumnStatus.setCellValueFactory(new PropertyValueFactory<>("documentStatus"));
+
+        tableViewDashBoardEnrolled.setItems(accountEnrolledObservableListEnrolled);
+        tableViewDashBoardEnrolledColumnFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+
+        tableViewDashBoardDeclined.setItems(accountDeclinedObservableListEnrolled);
+        tableViewDashBoardDeclinedColumnFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+    }
+
+    private void setDashboardCounters() {
+        labelDashboardApplicantsCounter.setText(String.valueOf(tableViewDashBoardApplicants.getItems().size()));
+        labelDashboardEnrolledCounter.setText(String.valueOf(tableViewDashBoardEnrolled.getItems().size()));
+        labelDashboardDeclinedCounter.setText(String.valueOf(tableViewDashBoardDeclined.getItems().size()));
+    }
+
+    private void setDashboardTableContents() {
+        accountApplicantsObservableListEnrolled = SQLPopulateTableViewDashboardApplicants();
+        accountEnrolledObservableListEnrolled = SQLPopulateTableViewDashboardEnrolled();
+        accountDeclinedObservableListEnrolled = SQLPopulateTableViewDashboardDeclined();
+
+        tableViewDashBoardApplicants.setItems(accountApplicantsObservableListEnrolled);
+        tableViewDashBoardEnrolled.setItems(accountEnrolledObservableListEnrolled);
+        tableViewDashBoardDeclined.setItems(accountDeclinedObservableListEnrolled);
+
+        tableViewDashBoardApplicants.refresh();
+        tableViewDashBoardEnrolled.refresh();
+        tableViewDashBoardDeclined.refresh();
     }
 
     private void setEnrolledTable() {
@@ -217,6 +258,8 @@ public class mainController implements Initializable {
         tableViewEnrolledColumnFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         tableViewEnrolledColumnStrand.setCellValueFactory(new PropertyValueFactory<>("strand"));
         tableViewEnrolledColumnSection.setCellValueFactory(new PropertyValueFactory<>("section"));
+
+        tableViewEnrolled.setSelectionModel(null);
     }
 
     private void initializeStudentAccount() {
@@ -360,38 +403,30 @@ public class mainController implements Initializable {
     }
 
     @FXML
-    void checkBoxEnrollOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void comboBoxCivilStatusOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void comboBoxSexOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void comboBoxStrandOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void tableViewDashBoardApplicantsClicked(MouseEvent event) {
-
+        if (event.getClickCount() == 2) {
+            openFromDashboard = 1;
+            openFromDashboardFXML();
+            tableViewDashBoardApplicants.getSelectionModel().clearSelection();
+        }
     }
 
     @FXML
     void tableViewDashBoardDeclinedClicked(MouseEvent event) {
-
+        if (event.getClickCount() == 2) {
+            openFromDashboard = 2;
+            openFromDashboardFXML();
+            tableViewDashBoardDeclined.getSelectionModel().clearSelection();
+        }
     }
 
     @FXML
     void tableViewDashBoardEnrolledClicked(MouseEvent event) {
-
+        if (event.getClickCount() == 2) {
+            openFromDashboard = 3;
+            openFromDashboardFXML();
+            tableViewDashBoardEnrolled.getSelectionModel().clearSelection();
+        }
     }
 
 
@@ -438,6 +473,9 @@ public class mainController implements Initializable {
                 anchorPaneEnroll.setVisible(false);
                 anchorPaneEnrolled.setVisible(false);
                 anchorPaneContactUs.setVisible(false);
+
+                setDashboardTableContents();
+                setDashboardCounters();
                 break;
             case 2: // enroll
                 buttonNavDashboard.setStyle("-fx-text-fill: #ffffff;");
@@ -596,7 +634,28 @@ public class mainController implements Initializable {
 
     private void loadEnrolledTable() {
         accountObservableListEnrolled = SQLPopulateTableViewEnrolled();
+        System.out.println(accountObservableListEnrolled.size() + " 632");
         tableViewEnrolled.setItems(accountObservableListEnrolled);
         tableViewEnrolled.refresh();
+    }
+
+    private void openFromDashboardFXML() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/zmis/studentInfo.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
+        stage.getIcons().add(logo);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.showAndWait();
+
+        anchorPaneDashboardRequestFocus();
+
     }
 }

@@ -54,6 +54,11 @@ public class Account {
         this.section = section;
     }
 
+    public Account(String fullName, String documentStatus) {
+        this.fullName = fullName;
+        this.documentStatus = documentStatus;
+    }
+
     public Account(String email) {
         this.email = email;
     }

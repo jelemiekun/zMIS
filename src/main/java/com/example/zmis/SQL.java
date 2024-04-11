@@ -351,4 +351,112 @@ public class SQL {
 
         return accountObservableList;
     }
+
+    public static ObservableList<Account> SQLPopulateTableViewDashboardApplicants() {
+        ObservableList<Account> accountObservableList = FXCollections.observableArrayList();
+
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+                String query = "SELECT full_name, document_status FROM student;";
+                preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    String fullName = resultSet.getString("full_name");
+                    String documentStatus = resultSet.getString("document_status");
+
+                    Account account = new Account(fullName, documentStatus);
+                    accountObservableList.add(account);
+                }
+            } else {
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return accountObservableList;
+    }
+
+    public static ObservableList<Account> SQLPopulateTableViewDashboardEnrolled() {
+        ObservableList<Account> accountObservableList = FXCollections.observableArrayList();
+
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+                String query = "SELECT full_name, document_status FROM student WHERE is_accepted = 1;";
+                preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    String fullName = resultSet.getString("full_name");
+                    String documentStatus = resultSet.getString("document_status");
+
+                    Account account = new Account(fullName, documentStatus);
+                    accountObservableList.add(account);
+                }
+            } else {
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return accountObservableList;
+    }
+
+    public static ObservableList<Account> SQLPopulateTableViewDashboardDeclined() {
+        ObservableList<Account> accountObservableList = FXCollections.observableArrayList();
+
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+                String query = "SELECT full_name, document_status FROM student WHERE is_accepted = 0;";
+                preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    String fullName = resultSet.getString("full_name");
+                    String documentStatus = resultSet.getString("document_status");
+
+                    Account account = new Account(fullName, documentStatus);
+                    accountObservableList.add(account);
+                }
+            } else {
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return accountObservableList;
+    }
 }

@@ -130,9 +130,18 @@
                                                 <Font name="Gill Sans MT" size="14.0" />
                                              </font>
                                           </MFXTextField>
-                                          <MFXTextField fx:id="textFieldLRN" floatingText="LRN" layoutX="740.0" layoutY="455.0" prefHeight="57.0" prefWidth="567.0">
+                                          <DatePicker fx:id="datePickerDateOfBirth" editable="false" layoutX="18.0" layoutY="186.0" onAction="#datePickerDateOfBirthOnAction" prefHeight="57.0" prefWidth="197.0" promptText="MM/DD/YYYY" />
+                                          <MFXLegacyComboBox fx:id="comboBoxSex" layoutX="237.0" layoutY="186.0" prefHeight="58.0" prefWidth="173.0" promptText="Select Sex" />
+                                          <MFXTextField fx:id="textFieldAge" floatingText="Age" layoutX="437.0" layoutY="186.0" prefHeight="58.0" prefWidth="155.0">
                                              <font>
                                                 <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <MFXLegacyComboBox fx:id="comboBoxCivilStatus" layoutX="617.0" layoutY="186.0" prefHeight="58.0" prefWidth="336.0" promptText="Select Civil Status" />
+                                          <MFXLegacyComboBox fx:id="comboBoxStrand" layoutX="973.0" layoutY="186.0" prefHeight="58.0" prefWidth="333.0" promptText="Select Strand" />
+                                          <MFXTextField fx:id="textFieldEmailAddress" allowEdit="false" floatingText="Email Address" layoutX="17.0" layoutY="273.0" prefHeight="58.0" prefWidth="600.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
                                              </font>
                                           </MFXTextField>
                                           <MFXTextField fx:id="textFieldPhoneNumber" floatingText="Phone Number" layoutX="636.0" layoutY="273.0" prefHeight="58.0" prefWidth="670.0">
@@ -140,19 +149,11 @@
                                                 <Font name="Gill Sans MT" size="14.0" />
                                              </font>
                                           </MFXTextField>
-                                          <MFXLegacyComboBox fx:id="comboBoxStrand" layoutX="973.0" layoutY="186.0" onAction="#comboBoxStrandOnAction" prefHeight="58.0" prefWidth="333.0" promptText="Select Strand" />
                                           <Label layoutX="27.0" layoutY="67.0" text="First name                Middle name                Last name                Suffix" textFill="#838282">
                                              <font>
                                                 <Font name="Gill Sans MT Italic" size="16.0" />
                                              </font>
                                           </Label>
-                                          <MFXTextField fx:id="textFieldAge" floatingText="Age" layoutX="437.0" layoutY="186.0" prefHeight="58.0" prefWidth="155.0">
-                                             <font>
-                                                <Font name="Gill Sans MT" size="14.0" />
-                                             </font>
-                                          </MFXTextField>
-                                          <MFXLegacyComboBox fx:id="comboBoxSex" layoutX="237.0" layoutY="186.0" onAction="#comboBoxSexOnAction" prefHeight="58.0" prefWidth="173.0" promptText="Select Sex" />
-                                          <MFXLegacyComboBox fx:id="comboBoxCivilStatus" layoutX="617.0" layoutY="186.0" onAction="#comboBoxCivilStatusOnAction" prefHeight="58.0" prefWidth="336.0" promptText="Select Civil Status" />
                                           <MFXTextField fx:id="textFieldElementarySchool" floatingText="Elementary School" layoutX="13.0" layoutY="455.0" prefHeight="58.0" prefWidth="452.0">
                                              <font>
                                                 <Font name="Gill Sans MT" size="14.0" />
@@ -173,18 +174,22 @@
                                                 <Font name="Gill Sans MT" size="14.0" />
                                              </font>
                                           </MFXTextField>
-                                          <DatePicker fx:id="datePickerDateOfBirth" editable="false" layoutX="18.0" layoutY="186.0" onAction="#datePickerDateOfBirthOnAction" prefHeight="57.0" prefWidth="197.0" promptText="MM/DD/YYYY" />
-                                          <JFXCheckBox fx:id="checkBoxForm137" layoutX="830.0" layoutY="522.0" onAction="#checkBoxEnrollOnAction" text="Form 137">
+                                          <MFXTextField fx:id="textFieldLRN" floatingText="LRN" layoutX="740.0" layoutY="455.0" prefHeight="57.0" prefWidth="567.0">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="14.0" />
+                                             </font>
+                                          </MFXTextField>
+                                          <JFXCheckBox fx:id="checkBoxForm137" layoutX="830.0" layoutY="522.0" text="Form 137">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
                                              </font>
                                           </JFXCheckBox>
-                                          <JFXCheckBox fx:id="checkBoxForm138" layoutX="970.0" layoutY="522.0" onAction="#checkBoxEnrollOnAction" text="Form 138">
+                                          <JFXCheckBox fx:id="checkBoxForm138" layoutX="970.0" layoutY="522.0" text="Form 138">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
                                              </font>
                                           </JFXCheckBox>
-                                          <JFXCheckBox fx:id="checkBoxGoodMoral" layoutX="1109.0" layoutY="522.0" onAction="#checkBoxEnrollOnAction" text="Good Moral">
+                                          <JFXCheckBox fx:id="checkBoxGoodMoral" layoutX="1109.0" layoutY="522.0" text="Good Moral">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
                                              </font>
@@ -199,11 +204,6 @@
                                                 <Font name="Gill Sans MT Italic" size="16.0" />
                                              </font>
                                           </Label>
-                                          <MFXTextField fx:id="textFieldEmailAddress" allowEdit="false" floatingText="Email Address" layoutX="17.0" layoutY="273.0" prefHeight="58.0" prefWidth="600.0">
-                                             <font>
-                                                <Font name="Gill Sans MT" size="16.0" />
-                                             </font>
-                                          </MFXTextField>
                                           <MFXButton fx:id="buttonSubmitApplication" buttonType="RAISED" defaultButton="true" depthLevel="LEVEL3" layoutX="1070.0" layoutY="590.0" onAction="#buttonSubmitApplicationOnAction" prefHeight="58.0" prefWidth="240.0" rippleColor="#0f9d58" text="Submit Application">
                                              <font>
                                                 <Font name="Gill Sans MT" size="20.0" />
@@ -256,7 +256,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="anchorPaneEnrolled" onMouseClicked="#anchorPaneEnrolledRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
                                        <children>
-                                          <MFXTextField fx:id="textFieldSearchEnrolled" borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="52.0" measureUnitGap="0.0" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
+                                          <MFXTextField borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="52.0" measureUnitGap="0.0" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
                                              </font>

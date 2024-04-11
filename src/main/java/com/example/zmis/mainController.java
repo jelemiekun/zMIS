@@ -250,7 +250,7 @@ public class mainController implements Initializable {
 
     private void setBirthdayPicker() {
         StringConverter<LocalDate> converter = new StringConverter<>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
             @Override
             public String toString(LocalDate date) {

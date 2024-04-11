@@ -161,12 +161,12 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="anchorPaneEnrolled" onMouseClicked="#anchorPaneEnrolledRequestFocus" prefHeight="662.0" prefWidth="1310.0">
                                        <children>
-                                          <MFXTextField fx:id="textFieldSearchEnrolled" borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="76.0" measureUnitGap="0.0" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
+                                          <MFXTextField fx:id="textFieldSearchEnrolled" borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="52.0" measureUnitGap="0.0" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
                                              </font>
                                           </MFXTextField>
-                                          <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="38.0" layoutY="5.0" onMouseClicked="#buttonImageViewSearchEnrolled" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="3.0" onMouseClicked="#buttonImageViewSearchEnrolled" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@search.png" />
                                              </image>
@@ -176,9 +176,9 @@
                                           </ImageView>
                                           <TableView fx:id="tableViewEnrolled" layoutY="54.0" prefHeight="606.0" prefWidth="1310.0">
                                             <columns>
-                                              <TableColumn fx:id="tableViewEnrolledColumnFullName" prefWidth="75.0" text="C1" />
-                                              <TableColumn fx:id="tableViewEnrolledColumnStrand" prefWidth="75.0" text="C2" />
-                                                <TableColumn fx:id="tableViewEnrolledColumnSection" prefWidth="1158.0" text="Column X" />
+                                              <TableColumn fx:id="tableViewEnrolledColumnFullName" prefWidth="398.0" sortable="false" text="Full Name" />
+                                              <TableColumn fx:id="tableViewEnrolledColumnStrand" prefWidth="490.0" sortable="false" text="Strand" />
+                                                <TableColumn fx:id="tableViewEnrolledColumnSection" prefWidth="420.0" sortable="false" text="Section" />
                                             </columns>
                                           </TableView>
                                        </children>
@@ -227,7 +227,7 @@
                            <children>
                               <JFXButton fx:id="buttonNavDashboard" onAction="#buttonNavDashboardOnAction" prefHeight="88.0" prefWidth="140.0" text="Dashboard" textFill="WHITE">
                                  <font>
-                                    <Font name="Gill Sans MT" size="20.0" />
+                                    <Font name="Gill Sans MT Bold" size="20.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -238,7 +238,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
                            <children>
-                              <JFXButton fx:id="buttonNavEnroll" onAction="#buttonNavEnrollOnAction" prefHeight="88.0" prefWidth="140.0" text="Enroll" textFill="YELLOW">
+                              <JFXButton fx:id="buttonNavEnroll" onAction="#buttonNavEnrollOnAction" prefHeight="88.0" prefWidth="140.0" text="Enroll" textFill="WHITE">
                                  <font>
                                     <Font name="Gill Sans MT Bold" size="20.0" />
                                  </font>
@@ -253,7 +253,7 @@
                            <children>
                               <JFXButton fx:id="buttonNavEnrolled" onAction="#buttonNavEnrolledOnAction" prefHeight="88.0" prefWidth="140.0" text="Enrolled" textFill="WHITE">
                                  <font>
-                                    <Font name="Gill Sans MT" size="20.0" />
+                                    <Font name="Gill Sans MT Bold" size="20.0" />
                                  </font>
                               </JFXButton>
                            </children>

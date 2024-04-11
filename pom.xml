@@ -180,7 +180,12 @@
             <artifactId>core</artifactId>
             <version>9.0.0</version>
         </dependency>
-
+        <!-- Gluon Maps -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>maps</artifactId>
+            <version>${version}</version>
+        </dependency>
 
     </dependencies>
 

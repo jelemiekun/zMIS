@@ -15,6 +15,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -33,6 +34,89 @@
                            <children>
                               <AnchorPane HBox.hgrow="ALWAYS">
                                  <children>
+                                    <AnchorPane fx:id="anchorPaneDashboard" onMouseClicked="#anchorPaneDashboardRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
+                                       <children>
+                                          <FlowPane hgap="85.0" prefHeight="662.0" prefWidth="1310.0" vgap="70.0">
+                                             <children>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
+                                                      <Label layoutX="85.0" layoutY="20.0" text="TOTAL NUMBER OF &#10;APPLICANTS" textAlignment="CENTER" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Gill Sans MT Bold" size="20.0" />
+                                                         </font></Label>
+                                                      <Label fx:id="labelDashboardApplicantsCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="81.0" prefHeight="112.0" prefWidth="335.0" text="0" textAlignment="CENTER" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Gill Sans MT Bold" size="96.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
+                                                      <Label layoutX="73.0" layoutY="20.0" text="TOTAL NUMBER OF &#10;ENROLLED STUDENTS" textAlignment="CENTER" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Gill Sans MT Bold" size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="labelDashboardEnrolledCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="81.0" prefHeight="112.0" prefWidth="335.0" text="0" textAlignment="CENTER" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Gill Sans MT Bold" size="96.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
+                                                      <Label alignment="CENTER" layoutX="51.0" layoutY="20.0" prefHeight="48.0" prefWidth="279.0" text="TOTAL NUMBER OF &#10;DECLINED STUDENTS" textAlignment="CENTER" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Gill Sans MT Bold" size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="labelDashboardDeclinedCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="81.0" prefHeight="112.0" prefWidth="335.0" text="0" textAlignment="CENTER" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Gill Sans MT Bold" size="96.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <TableView fx:id="tableViewDashBoardApplicants" onMouseClicked="#tableViewDashBoardApplicantsClicked" prefHeight="350.0" prefWidth="380.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="tableViewDashBoardApplicantsColumnFullName" prefWidth="260.0" text="Full Name" />
+                                                    <TableColumn fx:id="tableViewDashBoardApplicantsColumnStatus" prefWidth="119.0" text="Document Status" />
+                                                  </columns>
+                                                </TableView>
+                                                <TableView fx:id="tableViewDashBoardEnrolled" onMouseClicked="#tableViewDashBoardEnrolledClicked" prefHeight="350.0" prefWidth="380.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="tableViewDashBoardEnrolledColumnFullName" prefWidth="379.0" text="Full Name" />
+                                                   </columns>
+                                                </TableView>
+                                                <TableView fx:id="tableViewDashBoardDeclined" onMouseClicked="#tableViewDashBoardDeclinedClicked" prefHeight="350.0" prefWidth="380.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="tableViewDashBoardDeclinedColumnFullName" prefWidth="378.0" text="Full Name" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                          </FlowPane>
+                                          <Label layoutX="465.0" layoutY="245.0" text="Double click a row to view &#10;student information and set section" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutY="245.0" text="Double click a row to view &#10;student information and set enrollment" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="930.0" layoutY="245.0" text="&#10;Double click a row to view student information" textFill="#838282">
+                                             <font>
+                                                <Font name="Gill Sans MT Italic" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane fx:id="anchorPaneEnroll" onMouseClicked="#anchorPaneEnrollRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
                                        <children>
                                           <MFXTextField fx:id="textFieldFullName" floatingText="Full Name" layoutX="16.0" layoutY="91.0" prefHeight="58.0" prefWidth="600.0">
@@ -159,7 +243,7 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="anchorPaneEnrolled" onMouseClicked="#anchorPaneEnrolledRequestFocus" prefHeight="662.0" prefWidth="1310.0">
+                                    <AnchorPane fx:id="anchorPaneEnrolled" onMouseClicked="#anchorPaneEnrolledRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
                                        <children>
                                           <MFXTextField fx:id="textFieldSearchEnrolled" borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="52.0" measureUnitGap="0.0" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
                                              <font>
@@ -183,6 +267,7 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
+                                    <AnchorPane fx:id="anchorPaneContactUs" onMouseClicked="#anchorPaneContactUsRequestFocus" prefHeight="662.0" prefWidth="1310.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -199,7 +284,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="75.0" prefWidth="450.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #1f3bff;">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="75.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -221,9 +306,9 @@
                      </padding>
                   </AnchorPane>
                   <AnchorPane prefHeight="75.0" prefWidth="800.0" style="-fx-background-color: #1f3bff;" />
-                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
+                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
                               <JFXButton fx:id="buttonNavDashboard" onAction="#buttonNavDashboardOnAction" prefHeight="88.0" prefWidth="140.0" text="Dashboard" textFill="WHITE">
                                  <font>
@@ -234,9 +319,9 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
+                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
                               <JFXButton fx:id="buttonNavEnroll" onAction="#buttonNavEnrollOnAction" prefHeight="88.0" prefWidth="140.0" text="Enroll" textFill="WHITE">
                                  <font>
@@ -247,9 +332,9 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
+                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
                               <JFXButton fx:id="buttonNavEnrolled" onAction="#buttonNavEnrolledOnAction" prefHeight="88.0" prefWidth="140.0" text="Enrolled" textFill="WHITE">
                                  <font>
@@ -260,26 +345,26 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
+                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
                               <JFXButton fx:id="buttonNavContactUs" onAction="#buttonNavContactUsOnAction" prefHeight="88.0" prefWidth="140.0" text="Contact Us" textFill="WHITE">
                                  <font>
-                                    <Font name="Gill Sans MT" size="20.0" />
+                                    <Font name="Gill Sans MT Bold" size="20.0" />
                                  </font>
                               </JFXButton>
                            </children>
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="200.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="125.0">
+                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
                               <JFXButton fx:id="buttonNavLogOut" onAction="#buttonNavLogOutOnAction" prefHeight="88.0" prefWidth="140.0" text="Log out" textFill="WHITE">
                                  <font>
-                                    <Font name="Gill Sans MT" size="20.0" />
+                                    <Font name="Gill Sans MT Bold" size="20.0" />
                                  </font>
                               </JFXButton>
                            </children>

@@ -8,10 +8,19 @@ import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class mainController {
+
+    @FXML
+    private AnchorPane anchorPaneContactUs;
+
+    @FXML
+    private AnchorPane anchorPaneDashboard;
 
     @FXML
     private AnchorPane anchorPaneEnroll;
@@ -21,6 +30,9 @@ public class mainController {
 
     @FXML
     private JFXButton buttonNavContactUs;
+
+    @FXML
+    private JFXButton buttonNavDashboard;
 
     @FXML
     private JFXButton buttonNavEnroll;
@@ -62,6 +74,48 @@ public class mainController {
     private DatePicker datePickerDateOfBirth;
 
     @FXML
+    private Label labelDashboardApplicantsCounter;
+
+    @FXML
+    private Label labelDashboardDeclinedCounter;
+
+    @FXML
+    private Label labelDashboardEnrolledCounter;
+
+    @FXML
+    private TableView<?> tableViewDashBoardApplicants;
+
+    @FXML
+    private TableColumn<?, ?> tableViewDashBoardApplicantsColumnFullName;
+
+    @FXML
+    private TableColumn<?, ?> tableViewDashBoardApplicantsColumnStatus;
+
+    @FXML
+    private TableView<?> tableViewDashBoardDeclined;
+
+    @FXML
+    private TableColumn<?, ?> tableViewDashBoardDeclinedColumnFullName;
+
+    @FXML
+    private TableView<?> tableViewDashBoardEnrolled;
+
+    @FXML
+    private TableColumn<?, ?> tableViewDashBoardEnrolledColumnFullName;
+
+    @FXML
+    private TableView<?> tableViewEnrolled;
+
+    @FXML
+    private TableColumn<?, ?> tableViewEnrolledColumnFullName;
+
+    @FXML
+    private TableColumn<?, ?> tableViewEnrolledColumnSection;
+
+    @FXML
+    private TableColumn<?, ?> tableViewEnrolledColumnStrand;
+
+    @FXML
     private MFXTextField textFieldAge;
 
     @FXML
@@ -86,12 +140,40 @@ public class mainController {
     private MFXTextField textFieldLRN;
 
     @FXML
+    private MFXTextField textFieldSearchEnrolled;
+
+    @FXML
+    void anchorPaneContactUsRequestFocus(MouseEvent event) {
+
+    }
+
+    @FXML
+    void anchorPaneDashboardRequestFocus(MouseEvent event) {
+
+    }
+
+    @FXML
     void anchorPaneEnrollRequestFocus(MouseEvent event) {
 
     }
 
     @FXML
+    void anchorPaneEnrolledRequestFocus(MouseEvent event) {
+
+    }
+
+    @FXML
+    void buttonImageViewSearchEnrolled(MouseEvent event) {
+
+    }
+
+    @FXML
     void buttonNavContactUsOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonNavDashboardOnAction(ActionEvent event) {
 
     }
 
@@ -132,6 +214,21 @@ public class mainController {
 
     @FXML
     void comboBoxStrandOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableViewDashBoardApplicantsClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void tableViewDashBoardDeclinedClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void tableViewDashBoardEnrolledClicked(MouseEvent event) {
 
     }
 

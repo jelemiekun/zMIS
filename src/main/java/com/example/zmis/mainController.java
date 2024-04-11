@@ -34,9 +34,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.example.zmis.Alerts.*;
+import static com.example.zmis.SQL.*;
 import static com.example.zmis.loginRegisterController.*;
 
 public class mainController implements Initializable {
+    private Account account;
+    private boolean accountIsApplied;
 
     @FXML
     private HBox hBoxNavigationBar;
@@ -189,11 +192,21 @@ public class mainController implements Initializable {
         } else {
             buttonNavDashboard.setText("");
             buttonNavDashboard.setDisable(true);
+            initializeStudentAccount();
         }
 
         switchPane(startUpPane);
 
         Platform.runLater(() -> borderPaneMain.requestFocus());
+    }
+
+    private void initializeStudentAccount() {
+        accountIsApplied = SQLStudentAccountIsApplied();
+        if (accountIsApplied) {
+            account = new Account(referenceEmail);
+        } else {
+            account = SQLPopulateAppliedAccount();
+        }
     }
 
     @FXML

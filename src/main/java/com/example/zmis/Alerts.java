@@ -64,4 +64,12 @@ public class Alerts {
             return false; // clicked 'no'
         }
     }
+
+    public static void alertSQLRandomError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("An unexpected error occurred.");
+        alert.setContentText("An unexpected error occurred. Please try again later.");
+        alert.show();
+    }
 }

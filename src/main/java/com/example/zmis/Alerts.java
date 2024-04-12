@@ -80,4 +80,22 @@ public class Alerts {
         alert.setContentText("Please fill in all required fields with valid inputs.");
         alert.show();
     }
+
+    public static boolean alertConfirmOngoing() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Confirm process?");
+        alert.setContentText("Select 'yes' to continue and 'no' to cancel.");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonTypeYes) {
+            return true; // clicked 'yes'
+        } else {
+            return false; // clicked 'no'
+        }
+    }
 }

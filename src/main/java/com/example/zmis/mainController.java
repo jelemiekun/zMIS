@@ -421,18 +421,6 @@ public class mainController implements Initializable {
         }
     }
 
-    @FXML
-    void tableViewDashBoardDeclinedClicked(MouseEvent event) {
-        if (event.getClickCount() == 2) {
-            Account selectedAccount = tableViewDashBoardDeclined.getSelectionModel().getSelectedItem();
-            if (selectedAccount != null) {
-                full_name = selectedAccount.getFullName();
-                openFromDashboard = 2;
-                openFromDashboardFXML();
-                tableViewDashBoardDeclined.getSelectionModel().clearSelection();
-            }
-        }
-    }
 
     @FXML
     void tableViewDashBoardEnrolledClicked(MouseEvent event) {
@@ -440,13 +428,26 @@ public class mainController implements Initializable {
             Account selectedAccount = tableViewDashBoardEnrolled.getSelectionModel().getSelectedItem();
             if (selectedAccount != null) {
                 full_name = selectedAccount.getFullName();
-                openFromDashboard = 3;
+                openFromDashboard = 2;
                 openFromDashboardFXML();
                 tableViewDashBoardEnrolled.getSelectionModel().clearSelection();
             }
         }
     }
 
+
+    @FXML
+    void tableViewDashBoardDeclinedClicked(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            Account selectedAccount = tableViewDashBoardDeclined.getSelectionModel().getSelectedItem();
+            if (selectedAccount != null) {
+                full_name = selectedAccount.getFullName();
+                openFromDashboard = 3;
+                openFromDashboardFXML();
+                tableViewDashBoardDeclined.getSelectionModel().clearSelection();
+            }
+        }
+    }
 
 
     // Map

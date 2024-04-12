@@ -91,7 +91,7 @@ public class studentInfoController implements Initializable {
 
     @FXML
     void anchorPaneEnrollRequestFocus(MouseEvent event) {
-
+        anchorPaneEnroll.requestFocus();
     }
 
     @FXML
@@ -117,10 +117,15 @@ public class studentInfoController implements Initializable {
 
         switch (openFromDashboard) {
             case 1: // ongoing applicant
+                setOngoing();
                 break;
             case 2: // enrolled applicant
+                setAccepted();
+                disableCheckBoxes();
                 break;
             case 3: // declined applicant
+                setDeclined();
+                disableCheckBoxes();
                 break;
         }
     }
@@ -164,5 +169,27 @@ public class studentInfoController implements Initializable {
         textFieldJuniorHighSchool.setDisable(true);
         textFieldJuniorHighSchoolYearsAttended.setDisable(true);
         textFieldLRN.setDisable(true);
+    }
+
+    private void disableCheckBoxes() {
+        checkBoxForm137.setDisable(true);
+        checkBoxForm138.setDisable(true);
+        checkBoxGoodMoral.setDisable(true);
+    }
+
+    private void setOngoing() {
+        flowPaneButtons.setVisible(true);
+    }
+
+    private void setAccepted() {
+        labelApplicationStatus.setText("ENROLLED");
+        labelApplicationStatus.setStyle("-fx-text-fill: #20ab20");
+        labelApplicationStatus.setVisible(true);
+    }
+
+    private void setDeclined() {
+        labelApplicationStatus.setText("DECLINED");
+        labelApplicationStatus.setStyle("-fx-text-fill: #ff1a1a");
+        labelApplicationStatus.setVisible(true);
     }
 }

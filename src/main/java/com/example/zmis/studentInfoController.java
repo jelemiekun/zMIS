@@ -5,6 +5,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,6 +52,9 @@ public class studentInfoController implements Initializable {
 
     @FXML
     private MFXLegacyComboBox<String> comboBoxStrand;
+
+    @FXML
+    private MFXLegacyComboBox<String> comboBoxSection;
 
     @FXML
     private DatePicker datePickerDateOfBirth;
@@ -98,6 +103,7 @@ public class studentInfoController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getAccount();
+        setComboBoxStrandSection();
         setAccountEnrollValues();
         disableEnrollElements();
 
@@ -118,6 +124,17 @@ public class studentInfoController implements Initializable {
                 disableCheckBoxes();
                 break;
         }
+    }
+
+    private void setComboBoxStrandSection() {
+        ObservableList<String> observableListStrand = FXCollections.observableArrayList(
+                "STEM", "ICT - Computer Programming", "ICT - CSS"
+        );
+        ObservableList<String> observableListSection = FXCollections.observableArrayList(
+                "Delphi", "Javascript", "Kotlin", "Amethyst", "Barite", "Citrine", "AMD", "CSS"
+        );
+        comboBoxStrand.setItems(observableListStrand);
+        comboBoxSection.setItems(observableListSection);
     }
 
     private void getAccount() {
@@ -142,6 +159,7 @@ public class studentInfoController implements Initializable {
         checkBoxForm137.setSelected(account.isForm137());
         checkBoxForm138.setSelected(account.isForm138());
         checkBoxGoodMoral.setSelected(account.isGoodMoral());
+        comboBoxSection.setValue(account.getSection());
     }
 
     private void disableEnrollElements() {
@@ -151,7 +169,6 @@ public class studentInfoController implements Initializable {
         comboBoxSex.setDisable(true);
         textFieldAge.setDisable(true);
         comboBoxCivilStatus.setDisable(true);
-        comboBoxStrand.setDisable(true);
         textFieldEmailAddress.setDisable(true);
         textFieldPhoneNumber.setDisable(true);
         textFieldElementarySchool.setDisable(true);
@@ -165,6 +182,8 @@ public class studentInfoController implements Initializable {
         checkBoxForm137.setDisable(true);
         checkBoxForm138.setDisable(true);
         checkBoxGoodMoral.setDisable(true);
+        comboBoxStrand.setDisable(true);
+        comboBoxSection.setDisable(true);
     }
 
     private void setOngoing() {
@@ -181,6 +200,18 @@ public class studentInfoController implements Initializable {
         labelApplicationStatus.setText("DECLINED");
         labelApplicationStatus.setStyle("-fx-text-fill: #ff1a1a");
         labelApplicationStatus.setVisible(true);
+    }
+
+    @FXML
+    private void updateAccount() {
+        String strand = comboBoxStrand.getValue().trim();
+        String section = comboBoxSection.getValue().trim();
+        boolean form137 = checkBoxForm137.isSelected();
+        boolean form138 = checkBoxForm138.isSelected();
+        boolean goodMoral = checkBoxGoodMoral.isSelected();
+        String email = account.getEmail();
+
+        SQLUpdateAccount(strand, section, form137, form138, goodMoral, email);
     }
 
     @FXML

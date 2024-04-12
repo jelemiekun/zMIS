@@ -549,4 +549,36 @@ public class SQL {
             }
         }
     }
+
+    public static void SQLUpdateAccount(String strand, String section, boolean form137, boolean form138, boolean goodMoral, String email) {
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+
+                String query = "UPDATE student SET strand = ?, section = ?, form_137 = ?, form_138 = ?, good_moral = ? WHERE email = ?;";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, strand);
+                preparedStatement.setString(2, section);
+                preparedStatement.setBoolean(3, form137);
+                preparedStatement.setBoolean(4, form138);
+                preparedStatement.setBoolean(5, goodMoral);
+                preparedStatement.setString(6, email);
+
+                preparedStatement.executeUpdate();
+            } else {
+                alertNoConnection();
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 }

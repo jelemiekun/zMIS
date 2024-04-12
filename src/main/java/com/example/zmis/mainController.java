@@ -653,7 +653,6 @@ public class mainController implements Initializable {
 
     private void loadEnrolledTable() {
         accountObservableListEnrolled = SQLPopulateTableViewEnrolled();
-        System.out.println(accountObservableListEnrolled.size() + " 632");
         tableViewEnrolled.setItems(accountObservableListEnrolled);
         tableViewEnrolled.refresh();
     }

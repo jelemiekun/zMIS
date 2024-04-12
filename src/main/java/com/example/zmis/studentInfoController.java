@@ -17,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.zmis.Alerts.alertConfirmOngoing;
 import static com.example.zmis.SQL.*;
 import static com.example.zmis.mainController.*;
 
@@ -90,23 +91,8 @@ public class studentInfoController implements Initializable {
     private MFXTextField textFieldPhoneNumber;
 
     @FXML
-    void anchorPaneEnrollRequestFocus(MouseEvent event) {
+    void anchorPaneEnrollRequestFocus() {
         anchorPaneEnroll.requestFocus();
-    }
-
-    @FXML
-    void buttonAcceptApplicationOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void buttonDeclineApplicationOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void datePickerDateOfBirthOnAction(ActionEvent event) {
-
     }
 
     @Override
@@ -117,6 +103,10 @@ public class studentInfoController implements Initializable {
 
         switch (openFromDashboard) {
             case 1: // ongoing applicant
+                /*if (!account.isAccepted() && (account.getDocumentStatus().equals("Incomplete")))
+                    setOngoing();
+                else
+                    disableCheckBoxes();*/
                 setOngoing();
                 break;
             case 2: // enrolled applicant
@@ -191,5 +181,25 @@ public class studentInfoController implements Initializable {
         labelApplicationStatus.setText("DECLINED");
         labelApplicationStatus.setStyle("-fx-text-fill: #ff1a1a");
         labelApplicationStatus.setVisible(true);
+    }
+
+    @FXML
+    void buttonAcceptApplicationOnAction() {
+        if (alertConfirmOngoing()) {
+            SQLStudentAccountUpdateIsAccepted(account.getEmail(), true);
+            flowPaneButtons.setVisible(false);
+            setAccepted();
+            disableCheckBoxes();
+        }
+    }
+
+    @FXML
+    void buttonDeclineApplicationOnAction() {
+        if (alertConfirmOngoing()) {
+            SQLStudentAccountUpdateIsAccepted(account.getEmail(), false);
+            flowPaneButtons.setVisible(false);
+            setDeclined();
+            disableCheckBoxes();
+        }
     }
 }

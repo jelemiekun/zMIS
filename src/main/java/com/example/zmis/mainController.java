@@ -29,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -667,6 +668,10 @@ public class mainController implements Initializable {
         }
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(borderPaneMain.getScene().getWindow());
+
         Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
         stage.getIcons().add(logo);
         stage.setScene(scene);

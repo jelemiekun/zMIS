@@ -518,4 +518,35 @@ public class SQL {
 
         return accountObservableList;
     }
+
+
+    public static boolean SQLStudentAccountUpdateIsAccepted(String email, boolean isAccepted) {
+        Connection connection = null;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+                String query = "UPDATE student set is_accepted = ? where email = ?;";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setBoolean(1 , isAccepted);
+                preparedStatement.setString(2, email);
+
+                preparedStatement.executeUpdate();
+                return true;
+            } else {
+                alertNoConnection();
+                return false;
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+            return false;
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 }

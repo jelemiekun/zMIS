@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -11,10 +10,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.loginRegisterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.loginRegisterController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000099;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="705.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -24,7 +25,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="TOP_CENTER" prefHeight="259.0" prefWidth="600.0" spacing="30.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <HBox prefHeight="35.0" prefWidth="600.0" />
                                           <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -32,7 +33,10 @@
                                                 <Image url="@logo.png" />
                                              </image>
                                           </ImageView>
-                                          <Label text="zMIS" />
+                                          <Label text="zMIS" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="28.0" />
+                                             </font></Label>
                                        </children>
                                     </VBox>
                                  </children>
@@ -47,56 +51,51 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="CENTER" prefHeight="328.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <AnchorPane fx:id="anchorPaneOperation" prefHeight="38.0" prefWidth="403.0">
+                                          <AnchorPane fx:id="anchorPaneOperation" prefHeight="334.0" prefWidth="386.0">
                                              <children>
-                                                <VBox alignment="CENTER" prefHeight="155.0" prefWidth="404.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="334.0" stroke="WHITE" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px;" width="386.0" />
+                                                <AnchorPane fx:id="anchorPaneLogin" layoutX="68.0" layoutY="106.0" visible="false">
                                                    <children>
-                                                      <HBox prefHeight="100.0" prefWidth="200.0" />
-                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="ALWAYS">
-                                                         <children>
-                                                            <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#btnRegisterOnAction" onTouchReleased="#btnRegisterOnAction" prefWidth="100.0" text="Register" />
-                                                            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#btnLoginOnAction" onTouchReleased="#btnLoginOnAction" prefWidth="100.0" text="Login" />
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="600.0" spacing="10.0" VBox.vgrow="ALWAYS">
-                                                         <children>
-                                                            <Label text="Email" />
-                                                            <TextField fx:id="textFieldEmail" onKeyReleased="#textFieldEmailPressedEnter" prefHeight="25.0" prefWidth="250.0" />
-                                                         </children>
-                                                         <padding>
-                                                            <Insets left="-20.0" />
-                                                         </padding>
-                                                      </HBox>
-                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
-                                                         <children>
-                                                            <Label text="Password" />
-                                                            <PasswordField fx:id="passwordFieldPassword" onKeyReleased="#passwordFieldPasswordPressedEnter" prefWidth="250.0" />
-                                                         </children>
-                                                         <padding>
-                                                            <Insets left="-40.0" />
-                                                         </padding>
-                                                      </HBox>
-                                                      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                                         <children>
-                                                            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                                               <children>
-                                                                  <Button fx:id="btnProceed" mnemonicParsing="false" onAction="#btnProceedOnAction" onTouchReleased="#btnProceedOnAction" prefHeight="25.0" prefWidth="173.0" text="Login" />
-                                                               </children>
-                                                            </VBox>
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                                                      <Label text="Email" />
+                                                      <TextField fx:id="textFieldEmail" layoutY="20.0" onKeyReleased="#textFieldEmailPressedEnter" prefHeight="25.0" prefWidth="250.0" />
+                                                      <Label layoutY="59.0" text="Password" />
+                                                      <PasswordField fx:id="passwordFieldPassword" layoutY="79.0" onKeyReleased="#passwordFieldPasswordPressedEnter" prefWidth="250.0" />
                                                    </children>
-                                                </VBox>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="anchorPaneRegister" layoutX="68.0" layoutY="91.0" prefHeight="146.0" prefWidth="250.0">
+                                                   <children>
+                                                      <Label text="Email" />
+                                                      <TextField fx:id="textFieldEmail1" layoutY="20.0" onKeyReleased="#textFieldEmailPressedEnter" prefHeight="25.0" prefWidth="250.0" />
+                                                      <Label layoutY="53.0" text="Password" />
+                                                      <PasswordField fx:id="passwordFieldPassword1" layoutY="73.0" onKeyReleased="#passwordFieldPasswordPressedEnter" prefWidth="250.0" />
+                                                      <Label layoutY="105.0" text="Confirm Password" />
+                                                      <PasswordField fx:id="passwordFieldPassword11" layoutY="125.0" onKeyReleased="#passwordFieldPasswordPressedEnter" prefWidth="250.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <JFXButton fx:id="btnRegister" layoutX="49.0" layoutY="37.0" onAction="#btnRegisterOnAction" prefWidth="130.0" text="SIGN-UP" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btnLogin" layoutX="206.0" layoutY="37.0" onAction="#btnLoginOnAction" prefWidth="130.0" text="SIGN-IN" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btnProceed" layoutX="108.0" layoutY="273.0" onAction="#btnProceedOnAction" onTouchReleased="#btnProceedOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: #1e00c9; -fx-border-radius: 5px;" text="Login" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
                                              </children>
                                           </AnchorPane>
                                        </children>
                                     </HBox>
                                  </children>
                               </VBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" />
+                              <HBox prefHeight="76.0" prefWidth="600.0" />
                            </children>
                         </VBox>
                      </children>

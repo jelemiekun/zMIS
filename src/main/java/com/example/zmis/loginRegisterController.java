@@ -1,5 +1,6 @@
 package com.example.zmis;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,13 +32,19 @@ public class loginRegisterController implements Initializable {
     private AnchorPane anchorPaneOperation;
 
     @FXML
-    private Button btnLogin;
+    private AnchorPane anchorPaneLogin;
 
     @FXML
-    private Button btnProceed;
+    private AnchorPane anchorPaneRegister;
 
     @FXML
-    private Button btnRegister;
+    private JFXButton btnLogin;
+
+    @FXML
+    private JFXButton btnProceed;
+
+    @FXML
+    private JFXButton btnRegister;
 
     @FXML
     private PasswordField passwordFieldPassword;
@@ -45,22 +52,41 @@ public class loginRegisterController implements Initializable {
     @FXML
     private TextField textFieldEmail;
 
+    @FXML
+    private TextField textFieldEmail1;
+
+    @FXML
+    private PasswordField passwordFieldPassword1;
+
+    @FXML
+    private PasswordField passwordFieldPassword11;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnProceed.setText("Log in");
+        btnLoginOnAction();
         Platform.runLater(() -> anchorPaneOperation.requestFocus());
     }
 
     @FXML
     void btnLoginOnAction() {
         btnProceed.setText("Log in");
+        btnRegister.setStyle("-fx-background-color: #bcbcbc");
+        btnLogin.setStyle("-fx-background-color: #151515;");
+        anchorPaneRegister.setVisible(false);
+        anchorPaneLogin.setVisible(true);
         clearFields();
+        anchorPaneOperation.requestFocus();
     }
 
     @FXML
     void btnRegisterOnAction() {
         btnProceed.setText("Register");
+        btnLogin.setStyle("-fx-background-color: #bcbcbc");
+        btnRegister.setStyle("-fx-background-color: #151515;");
+        anchorPaneRegister.setVisible(true);
+        anchorPaneLogin.setVisible(false);
         clearFields();
+        anchorPaneOperation.requestFocus();
     }
 
     @FXML
@@ -81,31 +107,49 @@ public class loginRegisterController implements Initializable {
     }
 
     private void proceed() throws IOException {
-        String email = textFieldEmail.getText().trim();
-        String password = passwordFieldPassword.getText().trim();
+        if (btnProceed.getText().equals("Login")) {
+            String email = textFieldEmail.getText().trim();
+            String password = passwordFieldPassword.getText().trim();
 
-        if (!email.isEmpty() && !password.isEmpty()) {
-            if (btnProceed.getText().equals("Log in")) {
-                if (SQLLogin(email, password))
-                    goToMain();
-            } else if (btnProceed.getText().equals("Register")) {
-                if (SQLRegister(email, password)) {
-                    clearFields();
-                    anchorPaneOperation.requestFocus();
-                    btnProceed.setText("Log in");
-                } else {
-                    System.out.println("may mali");
-                    // ewan ko anong error pede maencounter dito? bat false
+            if (!email.isEmpty() && !password.isEmpty()) {
+                if (btnProceed.getText().equals("Log in")) {
+                    if (SQLLogin(email, password))
+                        goToMain();
+                    else
+                        System.out.println("incorrect");
                 }
+            } else {
+                alertSomeFieldsAreBlank();
             }
-        } else {
-            alertSomeFieldsAreBlank();
+        } else if (btnProceed.getText().equals("Register")) {
+
+                String emailRegister = textFieldEmail1.getText().trim();
+                String newPassword = passwordFieldPassword1.getText().trim();
+                String confirmNewPassword = passwordFieldPassword11.getText().trim();
+
+                if (!emailRegister.isEmpty() && !newPassword.isEmpty() && !confirmNewPassword.isEmpty()) {
+                    if (newPassword.equals(confirmNewPassword)) {
+                        if (SQLRegister(emailRegister, newPassword)) {
+                            btnLoginOnAction();
+                        } else {
+                            System.out.println("incorrect");
+                        }
+                    } else {
+                        alertRegisterPasswordMismatch();
+                    }
+                } else {
+                    alertSomeFieldsAreBlank();
+                }
         }
     }
 
     private void clearFields() {
         textFieldEmail.setText("");
         passwordFieldPassword.setText("");
+
+        textFieldEmail1.setText("");
+        passwordFieldPassword1.setText("");
+        passwordFieldPassword11.setText("");
     }
 
     private void goToMain() throws IOException {

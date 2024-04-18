@@ -15,9 +15,9 @@ import static com.example.zmis.mainController.full_name;
 public class SQL {
     private static HikariConfig config = new HikariConfig();
     private static HikariDataSource dataSource;
-    private static String url = "jdbc:mysql://gateway01.ap-southeast-1.prod.aws.tidbcloud.com/zMIS?verifyServerCertificate=false&useSSL=true&requireSSL=true&sslMode=VERIFY_CA&sslCert=src/main/resources/isrgrootx1.pem";
-    private static String user = "2ceuVZdRhiHHWcH.root";
-    private static String password = "HgAhMHYP4GsyA62G";
+    private static final String url = "jdbc:mysql://gateway01.ap-southeast-1.prod.aws.tidbcloud.com/zMIS?verifyServerCertificate=false&useSSL=true&requireSSL=true&sslMode=VERIFY_CA&sslCert=src/main/resources/isrgrootx1.pem";
+    private static final String user = "2ceuVZdRhiHHWcH.root";
+    private static final String password = "HgAhMHYP4GsyA62G";
     private static PreparedStatement preparedStatement;
 
     public static void SQLCreateConnection() {

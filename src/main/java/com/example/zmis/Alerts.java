@@ -23,6 +23,14 @@ public class Alerts {
         alert.show();
     }
 
+    public static void alertRegisterPasswordMismatch() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Incorrect password");
+        alert.setContentText("New password and confirm new password does not match. Please try again.");
+        alert.show();
+    }
+
     public static void alertSomeFieldsAreBlank() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -36,7 +44,7 @@ public class Alerts {
         alert.setTitle("Success");
         alert.setHeaderText("Registration Successful");
         alert.setContentText("Your registration has been completed successfully. You can now log in with your credentials.");
-        alert.show();
+        alert.showAndWait();
     }
 
     public static void alertRegisterEmailExists() {

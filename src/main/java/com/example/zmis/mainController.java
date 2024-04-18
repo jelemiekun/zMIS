@@ -19,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,7 +34,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -48,7 +50,6 @@ import static com.example.zmis.loginRegisterController.*;
 public class mainController implements Initializable {
     public static String full_name = "";
     private Account account;
-    private boolean accountIsApplied;
     private ObservableList<Account> accountObservableListEnrolled = FXCollections.observableArrayList();
     private ObservableList<Account> accountApplicantsObservableListEnrolled = FXCollections.observableArrayList();
     private ObservableList<Account> accountEnrolledObservableListEnrolled = FXCollections.observableArrayList();
@@ -121,9 +122,6 @@ public class mainController implements Initializable {
 
     @FXML
     private DatePicker datePickerDateOfBirth;
-
-    @FXML
-    private Hyperlink hyperLinkWebsite;
 
     @FXML
     private Label labelDashboardApplicantsCounter;
@@ -267,7 +265,7 @@ public class mainController implements Initializable {
     }
 
     private void initializeStudentAccount() {
-        accountIsApplied = SQLStudentAccountIsApplied();
+        boolean accountIsApplied = SQLStudentAccountIsApplied();
         if (accountIsApplied) {
             account = SQLPopulateAppliedAccount();
             setAccountEnrollValues();
@@ -363,20 +361,15 @@ public class mainController implements Initializable {
         }
     }
 
-    private void goToLogin() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/zmis/loginRegister.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
-        stage.getIcons().add(logo);
-        stage.setScene(scene);
-        stage.show();
 
-        Stage thisStage = (Stage) buttonNavLogOut.getScene().getWindow();
-        thisStage.close();
-        isAdmin = false;
-        referenceEmail = "";
+    @FXML
+    void hyperLinkWebsiteOnAction() {
+        try {
+            Desktop.getDesktop().browse(new URI("https://www.umak.edu.ph"));
+        } catch (IOException | URISyntaxException e) {
+            alertNoConnection();
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -680,7 +673,7 @@ public class mainController implements Initializable {
 
     private void openFromDashboardFXML() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/zmis/studentInfo.fxml"));
-        Parent root = null;
+        Parent root;
         try {
             root = loader.load();
         } catch (IOException e) {
@@ -701,5 +694,21 @@ public class mainController implements Initializable {
         anchorPaneDashboardRequestFocus();
         setDashboardTableContents();
         full_name = "";
+    }
+
+    private void goToLogin() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/zmis/loginRegister.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
+        stage.getIcons().add(logo);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage thisStage = (Stage) buttonNavLogOut.getScene().getWindow();
+        thisStage.close();
+        isAdmin = false;
+        referenceEmail = "";
     }
 }

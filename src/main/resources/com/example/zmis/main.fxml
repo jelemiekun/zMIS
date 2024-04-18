@@ -319,7 +319,7 @@
                                                 <Font name="Gill Sans MT Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Hyperlink fx:id="hyperLinkWebsite" ellipsisString="" layoutY="376.0" prefHeight="39.0" prefWidth="161.0" text="umak.edu.ph" textFill="#0066ff" underline="true">
+                                          <Hyperlink ellipsisString="" layoutY="376.0" onAction="#hyperLinkWebsiteOnAction" prefHeight="39.0" prefWidth="161.0" text="umak.edu.ph" textFill="#0066ff" underline="true">
                                              <font>
                                                 <Font name="Gill Sans MT Bold" size="24.0" />
                                              </font>

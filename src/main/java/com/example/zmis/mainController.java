@@ -465,7 +465,8 @@ public class mainController implements Initializable {
 
     // Map
     private static final MapPoint mapPoint = new MapPoint(14.56378, 121.05670);
-    private void createMapview() {
+
+    private void createMapView() {
         Platform.runLater(() -> {
             vBoxMap.getChildren().clear();
             MapView mapView = new MapView();
@@ -477,6 +478,7 @@ public class mainController implements Initializable {
             VBox.setVgrow(mapView, Priority.ALWAYS);
         });
     }
+
     private static class CustomMapLayer extends MapLayer {
         private final Node marker;
         public CustomMapLayer() {
@@ -537,7 +539,6 @@ public class mainController implements Initializable {
                 loadEnrolledTable();
                 break;
             case 4: // contact us
-                createMapview();
                 buttonNavDashboard.setStyle("-fx-text-fill: #ffffff;");
                 buttonNavEnroll.setStyle("-fx-text-fill: #ffffff;");
                 buttonNavEnrolled.setStyle("-fx-text-fill: #ffffff");
@@ -548,6 +549,8 @@ public class mainController implements Initializable {
                 anchorPaneEnroll.setVisible(false);
                 anchorPaneEnrolled.setVisible(false);
                 anchorPaneContactUs.setVisible(true);
+
+                createMapView();
                 break;
         }
     }

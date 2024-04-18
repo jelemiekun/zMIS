@@ -63,8 +63,10 @@ public class loginRegisterController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnLoginOnAction();
-        Platform.runLater(() -> anchorPaneOperation.requestFocus());
+        Platform.runLater(() ->  {
+            anchorPaneOperation.requestFocus();
+            btnLoginOnAction();
+        });
     }
 
     @FXML
@@ -107,7 +109,8 @@ public class loginRegisterController implements Initializable {
     }
 
     private void proceed() throws IOException {
-        if (btnProceed.getText().equals("Login")) {
+        if (btnProceed.getText().equals("Log in")) {
+            System.out.println("login");
             String email = textFieldEmail.getText().trim();
             String password = passwordFieldPassword.getText().trim();
 
@@ -122,6 +125,7 @@ public class loginRegisterController implements Initializable {
                 alertSomeFieldsAreBlank();
             }
         } else if (btnProceed.getText().equals("Register")) {
+            System.out.println("register");
 
                 String emailRegister = textFieldEmail1.getText().trim();
                 String newPassword = passwordFieldPassword1.getText().trim();

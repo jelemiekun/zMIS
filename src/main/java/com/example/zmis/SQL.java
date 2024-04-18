@@ -28,9 +28,9 @@ public class SQL {
         config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
         config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
         config.setMaximumPoolSize(10);
-        config.setConnectionTimeout(900000); // 30 seconds
+        config.setConnectionTimeout(600000); // 10 minuts
         config.setIdleTimeout(600000); // 10 minutes
-        config.setMaxLifetime(900000); // 15 minutes
+        config.setMaxLifetime(30000); // 30 seconds
         dataSource = new HikariDataSource(config);
     }
 

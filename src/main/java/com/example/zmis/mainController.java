@@ -593,9 +593,11 @@ public class mainController implements Initializable {
                     }
 
                     if (proceed) {
-                        SQLInsertIntoStudent(lrn, name, phoneNumber, strand, age, sex, birthdate, address, civilStatus, elemSchool, elemSchoolSY,
-                                juniorHS, juniorHSSY, getDocumentStatus(form137, form138, goodMoral), form137, form138, goodMoral);
-                        disableEnrollElements();
+                        if (alertConfirmSubmit()) {
+                            SQLInsertIntoStudent(lrn, name, phoneNumber, strand, age, sex, birthdate, address, civilStatus, elemSchool, elemSchoolSY,
+                                    juniorHS, juniorHSSY, getDocumentStatus(form137, form138, goodMoral), form137, form138, goodMoral);
+                            disableEnrollElements();
+                        }
                     }
                 }
             } catch (NumberFormatException e) {

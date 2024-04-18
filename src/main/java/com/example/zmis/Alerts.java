@@ -89,6 +89,21 @@ public class Alerts {
         alert.show();
     }
 
+    public static boolean alertConfirmSubmit() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Confirm Submission?");
+        alert.setContentText("Select 'yes' to submit and 'cancel' to cancel.");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("Cancel");
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == buttonTypeYes;
+    }
+
+
     public static boolean alertConfirmOngoing() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Confirm");
@@ -100,10 +115,6 @@ public class Alerts {
 
         alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == buttonTypeYes) {
-            return true; // clicked 'yes'
-        } else {
-            return false; // clicked 'no'
-        }
+        return result.isPresent() && result.get() == buttonTypeYes;
     }
 }

@@ -1,8 +1,5 @@
 package com.example.zmis;
 
-import io.github.palexdev.materialfx.theming.JavaFXThemes;
-import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
-import io.github.palexdev.materialfx.theming.UserAgentBuilder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

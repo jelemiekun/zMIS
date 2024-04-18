@@ -7,19 +7,14 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import static com.example.zmis.SQL.*;
 import static com.example.zmis.mainController.*;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(SQL::SQLCreateConnection);
-        executor.shutdown();
-
-
+        createConnection();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("loginRegister.fxml"));
         setStyleSheets();
         Scene scene = new Scene(fxmlLoader.load());

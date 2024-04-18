@@ -2,6 +2,8 @@ package com.example.zmis;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -20,7 +22,7 @@ public class SQL {
     private static final String password = "HgAhMHYP4GsyA62G";
     private static PreparedStatement preparedStatement;
 
-    public static void SQLCreateConnection() {
+    private static void SQLCreateConnection() {
         config.setJdbcUrl(url);
         config.setUsername(user);
         config.setPassword(password);
@@ -32,6 +34,12 @@ public class SQL {
         config.setIdleTimeout(600000); // 10 minutes
         config.setMaxLifetime(30000); // 30 seconds
         dataSource = new HikariDataSource(config);
+    }
+
+    public static void createConnection() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(SQL::SQLCreateConnection);
+        executor.shutdown();
     }
 
     public static boolean SQLLogin(String email, String password) {

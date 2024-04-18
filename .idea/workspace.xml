@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cd26fb5d-5038-4cc5-92f8-c71a81a52847" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/zmis/SQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/zmis/SQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/zmis/loginRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/zmis/loginRegisterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/zmis/mainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/zmis/mainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/zmis/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/zmis/main.fxml" afterDir="false" />
     </list>

@@ -119,7 +119,7 @@ public class loginRegisterController implements Initializable {
                     if (SQLLogin(email, password))
                         goToMain();
                     else
-                        System.out.println("incorrect");
+                        alertIncorrectCredentials();
                 }
             } else {
                 alertSomeFieldsAreBlank();

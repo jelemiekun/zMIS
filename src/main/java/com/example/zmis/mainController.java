@@ -468,7 +468,7 @@ public class mainController implements Initializable {
             mapView.setZoom(16.5);
             mapView.setCenter(mapPoint);
             vBoxMap.getChildren().add(mapView);
-            VBox.setVgrow(mapView, Priority.ALWAYS);
+            VBox.setVgrow(mapView, Priority.NEVER);
         });
     }
 

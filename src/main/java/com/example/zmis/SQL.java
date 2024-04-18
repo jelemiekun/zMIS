@@ -52,7 +52,6 @@ public class SQL {
                     referenceEmail = email;
                     return proceed;
                 }
-                alertIncorrectCredentials();
                 return false;
             } else {
                 alertNoConnection();

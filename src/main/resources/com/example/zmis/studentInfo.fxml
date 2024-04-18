@@ -114,19 +114,19 @@
                   </MFXButton>
                </children>
             </FlowPane>
-               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1310.0" />
+               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="49.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1310.0" />
                <Label layoutX="510.0" layoutY="10.0" text="PERSONAL INFORMATION" textFill="YELLOW">
                    <font>
                        <Font name="Gill Sans MT Bold" size="24.0" />
                    </font>
                </Label>
-               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="673.0" />
+               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="49.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="673.0" />
                <Label layoutX="150.0" layoutY="377.0" text="EDUCATIONAL BACKGROUND" textFill="YELLOW">
                    <font>
                        <Font name="Gill Sans MT Bold" size="24.0" />
                    </font>
                </Label>
-               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutX="743.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="567.0" />
+               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="49.0" layoutX="743.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="567.0" />
                <Label layoutX="915.0" layoutY="377.0" text="REQUIREMENTS" textFill="YELLOW">
                    <font>
                        <Font name="Gill Sans MT Bold" size="24.0" />

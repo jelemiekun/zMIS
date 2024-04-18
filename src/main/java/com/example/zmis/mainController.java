@@ -25,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -163,9 +165,6 @@ public class mainController implements Initializable {
     private TableColumn<Account, String> tableViewEnrolledColumnSection;
 
     @FXML
-    private TableColumn<Account, String> tableViewEnrolledColumnStrand;
-
-    @FXML
     private MFXTextField textFieldAge;
 
     @FXML
@@ -188,6 +187,9 @@ public class mainController implements Initializable {
 
     @FXML
     private MFXTextField textFieldLRN;
+
+    @FXML
+    private MFXTextField textFieldSearch;
 
     @FXML
     private VBox vBoxMap;
@@ -256,11 +258,9 @@ public class mainController implements Initializable {
     private void setEnrolledTable() {
         tableViewEnrolled.setItems(accountObservableListEnrolled);
         tableViewEnrolledColumnFullName.setReorderable(false);
-        tableViewEnrolledColumnStrand.setReorderable(false);
         tableViewEnrolledColumnSection.setReorderable(false);
 
         tableViewEnrolledColumnFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-        tableViewEnrolledColumnStrand.setCellValueFactory(new PropertyValueFactory<>("strand"));
         tableViewEnrolledColumnSection.setCellValueFactory(new PropertyValueFactory<>("section"));
 
         tableViewEnrolled.setSelectionModel(null);
@@ -381,7 +381,13 @@ public class mainController implements Initializable {
 
     @FXML
     void buttonImageViewSearchEnrolled() {
+        accountObservableListEnrolled.clear();
+        String search = textFieldSearch.getText().trim();
 
+        if (!search.isEmpty())
+            loadEnrolledTableSearch(search);
+        else
+            loadEnrolledTable();
     }
 
     @FXML
@@ -407,6 +413,12 @@ public class mainController implements Initializable {
     @FXML
     void buttonSubmitApplicationOnAction() {
         checkFieldsBeforeSubmit();
+    }
+
+    @FXML
+    void textFieldSearchPressedEnter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER)
+            buttonImageViewSearchEnrolled();
     }
 
     @FXML
@@ -653,6 +665,12 @@ public class mainController implements Initializable {
 
     private void loadEnrolledTable() {
         accountObservableListEnrolled = SQLPopulateTableViewEnrolled();
+        tableViewEnrolled.setItems(accountObservableListEnrolled);
+        tableViewEnrolled.refresh();
+    }
+
+    private void loadEnrolledTableSearch(String search) {
+        accountObservableListEnrolled = SQLSearchEnrolled(search);
         tableViewEnrolled.setItems(accountObservableListEnrolled);
         tableViewEnrolled.refresh();
     }

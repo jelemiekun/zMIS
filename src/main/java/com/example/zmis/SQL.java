@@ -30,7 +30,7 @@ public class SQL {
         config.setMaximumPoolSize(10);
         config.setConnectionTimeout(30000); // 30 seconds
         config.setIdleTimeout(600000); // 10 minutes
-        config.setMaxLifetime(1800000); // 30 minutes
+        config.setMaxLifetime(900000); // 15 minutes
         dataSource = new HikariDataSource(config);
     }
 
@@ -581,4 +581,30 @@ public class SQL {
             }
         }
     }
+
+    public static ObservableList<Account> SQLSearchEnrolled(String search) {
+        String query = "SELECT full_name, strand, section FROM student WHERE is_accepted = 1 AND full_name LIKE ?";
+        ObservableList<Account> searchedQuery = FXCollections.observableArrayList();
+
+        try (Connection connection = dataSource.getConnection()) {
+            String likeParam = "%" + search + "%";
+            PreparedStatement preparedStatement1 = connection.prepareStatement(query);
+            preparedStatement1.setString(1, likeParam);
+
+            ResultSet resultSet = preparedStatement1.executeQuery();
+
+            while (resultSet.next()) {
+                String fullName = resultSet.getString("full_name");
+                String strand = resultSet.getString("strand");
+                String section = resultSet.getString("section");
+
+                searchedQuery.add(new Account(fullName, strand, section));
+            }
+        } catch (SQLException e) {
+            alertNoConnection();
+            throw new RuntimeException(e);
+        }
+        return searchedQuery;
+    }
+
 }

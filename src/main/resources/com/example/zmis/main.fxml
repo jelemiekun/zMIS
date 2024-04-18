@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -41,7 +41,7 @@
                                              <children>
                                                 <AnchorPane>
                                                    <children>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
+                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
                                                       <Label layoutX="85.0" layoutY="20.0" text="TOTAL NUMBER OF &#10;APPLICANTS" textAlignment="CENTER" textFill="WHITE">
                                                          <font>
                                                             <Font name="Gill Sans MT Bold" size="20.0" />
@@ -55,7 +55,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane>
                                                    <children>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
+                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
                                                       <Label layoutX="73.0" layoutY="20.0" text="TOTAL NUMBER OF &#10;ENROLLED STUDENTS" textAlignment="CENTER" textFill="WHITE">
                                                          <font>
                                                             <Font name="Gill Sans MT Bold" size="20.0" />
@@ -70,7 +70,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane>
                                                    <children>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
+                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="215.0" stroke="TRANSPARENT" strokeType="INSIDE" width="380.0" />
                                                       <Label alignment="CENTER" layoutX="51.0" layoutY="20.0" prefHeight="48.0" prefWidth="279.0" text="TOTAL NUMBER OF &#10;DECLINED STUDENTS" textAlignment="CENTER" textFill="WHITE">
                                                          <font>
                                                             <Font name="Gill Sans MT Bold" size="20.0" />
@@ -209,19 +209,19 @@
                                                 <Font name="Gill Sans MT" size="20.0" />
                                              </font>
                                           </MFXButton>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutX="14.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1290.0" />
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="49.0" layoutX="14.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1290.0" />
                                           <Label layoutX="510.0" layoutY="10.0" text="PERSONAL INFORMATION" textFill="YELLOW">
                                              <font>
                                                 <Font name="Gill Sans MT Bold" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutX="12.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="661.0" />
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="49.0" layoutX="12.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="661.0" />
                                           <Label layoutX="150.0" layoutY="377.0" text="EDUCATIONAL BACKGROUND" textFill="YELLOW">
                                              <font>
                                                 <Font name="Gill Sans MT Bold" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f3bff" height="49.0" layoutX="740.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="567.0" />
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000099" height="49.0" layoutX="740.0" layoutY="367.0" stroke="TRANSPARENT" strokeType="INSIDE" width="567.0" />
                                           <Label layoutX="915.0" layoutY="377.0" text="REQUIREMENTS" textFill="YELLOW">
                                              <font>
                                                 <Font name="Gill Sans MT Bold" size="24.0" />
@@ -256,7 +256,7 @@
                                     </AnchorPane>
                                     <AnchorPane fx:id="anchorPaneEnrolled" onMouseClicked="#anchorPaneEnrolledRequestFocus" prefHeight="662.0" prefWidth="1310.0" visible="false">
                                        <children>
-                                          <MFXTextField borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="52.0" measureUnitGap="0.0" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
+                                          <MFXTextField fx:id="textFieldSearch" borderGap="0.0" floatMode="DISABLED" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="52.0" measureUnitGap="0.0" onKeyPressed="#textFieldSearchPressedEnter" prefHeight="34.0" prefWidth="371.0" promptText="Search student name">
                                              <font>
                                                 <Font name="Gill Sans MT" size="16.0" />
                                              </font>
@@ -271,9 +271,8 @@
                                           </ImageView>
                                           <TableView fx:id="tableViewEnrolled" layoutY="54.0" prefHeight="606.0" prefWidth="1310.0">
                                             <columns>
-                                              <TableColumn fx:id="tableViewEnrolledColumnFullName" prefWidth="398.0" sortable="false" text="Full Name" />
-                                              <TableColumn fx:id="tableViewEnrolledColumnStrand" prefWidth="490.0" sortable="false" text="Strand" />
-                                                <TableColumn fx:id="tableViewEnrolledColumnSection" prefWidth="420.0" sortable="false" text="Section" />
+                                              <TableColumn fx:id="tableViewEnrolledColumnFullName" prefWidth="667.0" sortable="false" text="Full Name" />
+                                                <TableColumn fx:id="tableViewEnrolledColumnSection" prefWidth="637.0" sortable="false" text="Section" />
                                             </columns>
                                           </TableView>
                                        </children>
@@ -300,7 +299,7 @@
                                                 <Font name="Gill Sans MT Bold" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutY="583.0" prefWidth="459.0" text="Offices are open from Mondays to Fridays8:00 AM to 5:00 PM GMT +8 (Closed on Holidays)" wrapText="true">
+                                          <Label layoutY="583.0" prefWidth="459.0" text="Offices are open from Mondays to Fridays 8:00 AM to 5:00 PM GMT +8 (Closed on Holidays)" wrapText="true">
                                              <font>
                                                 <Font name="Gill Sans MT Bold" size="18.0" />
                                              </font>
@@ -343,7 +342,7 @@
          <children>
             <HBox fx:id="hBoxNavigationBar" alignment="CENTER" prefHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #000099;">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="75.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -364,8 +363,8 @@
                         <Insets left="20.0" />
                      </padding>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="800.0" style="-fx-background-color: #1f3bff;" />
-                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="800.0" style="-fx-background-color: #000099;" />
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #000099;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
@@ -378,7 +377,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anchorPaneEnrollNavigation" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane fx:id="anchorPaneEnrollNavigation" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #000099;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
@@ -391,7 +390,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #000099;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
@@ -404,7 +403,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #000099;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>
@@ -417,7 +416,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #1f3bff;">
+                  <AnchorPane prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #000099;">
                      <children>
                         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                            <children>

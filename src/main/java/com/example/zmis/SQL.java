@@ -582,11 +582,11 @@ public class SQL {
     }
 
     public static ObservableList<Account> SQLSearchEnrolled(String search) {
-        String query = "SELECT full_name, strand, section FROM student WHERE is_accepted = 1 AND full_name LIKE ?";
+        String query = "SELECT full_name, strand, section FROM student WHERE is_accepted = 1 AND LOWER(full_name) LIKE ?";
         ObservableList<Account> searchedQuery = FXCollections.observableArrayList();
 
         try (Connection connection = dataSource.getConnection()) {
-            String likeParam = "%" + search + "%";
+            String likeParam = "%" + search.toLowerCase() + "%";
             PreparedStatement preparedStatement1 = connection.prepareStatement(query);
             preparedStatement1.setString(1, likeParam);
 

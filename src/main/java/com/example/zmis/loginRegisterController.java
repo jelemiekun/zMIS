@@ -110,7 +110,6 @@ public class loginRegisterController implements Initializable {
 
     private void proceed() throws IOException {
         if (btnProceed.getText().equals("Log in")) {
-            System.out.println("login");
             String email = textFieldEmail.getText().trim();
             String password = passwordFieldPassword.getText().trim();
 
@@ -125,8 +124,6 @@ public class loginRegisterController implements Initializable {
                 alertSomeFieldsAreBlank();
             }
         } else if (btnProceed.getText().equals("Register")) {
-            System.out.println("register");
-
                 String emailRegister = textFieldEmail1.getText().trim();
                 String newPassword = passwordFieldPassword1.getText().trim();
                 String confirmNewPassword = passwordFieldPassword11.getText().trim();
@@ -164,6 +161,8 @@ public class loginRegisterController implements Initializable {
         Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
         stage.getIcons().add(logo);
         stage.setScene(scene);
+        stage.setTitle("zMIS");
+        stage.setResizable(false);
         stage.show();
 
         Stage thisStage = (Stage) anchorPaneOperation.getScene().getWindow();

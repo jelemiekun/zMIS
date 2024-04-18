@@ -166,6 +166,9 @@ public class mainController implements Initializable {
     private TableColumn<Account, String> tableViewEnrolledColumnSection;
 
     @FXML
+    private TableColumn<Account, String> tableViewEnrolledColumnStrand;
+
+    @FXML
     private MFXTextField textFieldAge;
 
     @FXML
@@ -260,8 +263,10 @@ public class mainController implements Initializable {
         tableViewEnrolled.setItems(accountObservableListEnrolled);
         tableViewEnrolledColumnFullName.setReorderable(false);
         tableViewEnrolledColumnSection.setReorderable(false);
+        tableViewEnrolledColumnStrand.setReorderable(false);
 
         tableViewEnrolledColumnFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        tableViewEnrolledColumnStrand.setCellValueFactory(new PropertyValueFactory<>("strand"));
         tableViewEnrolledColumnSection.setCellValueFactory(new PropertyValueFactory<>("section"));
 
         tableViewEnrolled.setSelectionModel(null);
@@ -583,8 +588,8 @@ public class mainController implements Initializable {
                     boolean form138 = checkBoxForm138.isSelected();
                     boolean goodMoral = checkBoxGoodMoral.isSelected();
 
-                    if (name.isEmpty() || address.isEmpty() || !validBirthdate(birthdate) || sex.isEmpty() ||
-                            civilStatus.isEmpty() || strand.isEmpty() || phoneNumber.isEmpty() || elemSchool.isEmpty() || elemSchoolSY.isEmpty() ||
+                    if (name.isEmpty() || address.isEmpty() || !validBirthdate(birthdate) || sex == null ||
+                            civilStatus == null || strand == null || phoneNumber.isEmpty() || elemSchool.isEmpty() || elemSchoolSY.isEmpty() ||
                             juniorHS.isEmpty() || juniorHSSY.isEmpty() || lrn.isEmpty()) {
                         alertSomeFieldsAreBlankOrInvalid();
                         proceed = false;
@@ -600,7 +605,7 @@ public class mainController implements Initializable {
                         }
                     }
                 }
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 alertSomeFieldsAreBlankOrInvalid();
             }
         }
@@ -704,6 +709,7 @@ public class mainController implements Initializable {
         stage.getIcons().add(logo);
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.setTitle("zMIS");
         stage.showAndWait();
 
         anchorPaneDashboardRequestFocus();
@@ -719,6 +725,7 @@ public class mainController implements Initializable {
         Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
         stage.getIcons().add(logo);
         stage.setScene(scene);
+        stage.setTitle("zMIS");
         stage.show();
 
         Stage thisStage = (Stage) buttonNavLogOut.getScene().getWindow();

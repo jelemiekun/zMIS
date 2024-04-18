@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zmis.mainController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -85,18 +85,18 @@
                                                 </AnchorPane>
                                                 <TableView fx:id="tableViewDashBoardApplicants" onMouseClicked="#tableViewDashBoardApplicantsClicked" prefHeight="350.0" prefWidth="380.0">
                                                   <columns>
-                                                    <TableColumn fx:id="tableViewDashBoardApplicantsColumnFullName" prefWidth="260.0" text="Full Name" />
-                                                    <TableColumn fx:id="tableViewDashBoardApplicantsColumnStatus" prefWidth="119.0" text="Document Status" />
+                                                    <TableColumn fx:id="tableViewDashBoardApplicantsColumnFullName" prefWidth="255.0" text="Full Name" />
+                                                    <TableColumn fx:id="tableViewDashBoardApplicantsColumnStatus" prefWidth="110.0" text="Document Status" />
                                                   </columns>
                                                 </TableView>
                                                 <TableView fx:id="tableViewDashBoardEnrolled" onMouseClicked="#tableViewDashBoardEnrolledClicked" prefHeight="350.0" prefWidth="380.0">
                                                    <columns>
-                                                      <TableColumn fx:id="tableViewDashBoardEnrolledColumnFullName" prefWidth="379.0" text="Full Name" />
+                                                      <TableColumn fx:id="tableViewDashBoardEnrolledColumnFullName" prefWidth="365.0" text="Full Name" />
                                                    </columns>
                                                 </TableView>
                                                 <TableView fx:id="tableViewDashBoardDeclined" onMouseClicked="#tableViewDashBoardDeclinedClicked" prefHeight="350.0" prefWidth="380.0">
                                                    <columns>
-                                                      <TableColumn fx:id="tableViewDashBoardDeclinedColumnFullName" prefWidth="378.0" text="Full Name" />
+                                                      <TableColumn fx:id="tableViewDashBoardDeclinedColumnFullName" prefWidth="365.0" text="Full Name" />
                                                    </columns>
                                                 </TableView>
                                              </children>
@@ -271,8 +271,9 @@
                                           </ImageView>
                                           <TableView fx:id="tableViewEnrolled" layoutY="54.0" prefHeight="606.0" prefWidth="1310.0">
                                             <columns>
-                                              <TableColumn fx:id="tableViewEnrolledColumnFullName" prefWidth="667.0" sortable="false" text="Full Name" />
-                                                <TableColumn fx:id="tableViewEnrolledColumnSection" prefWidth="637.0" sortable="false" text="Section" />
+                                              <TableColumn fx:id="tableViewEnrolledColumnFullName" prefWidth="524.0" sortable="false" text="Full Name" />
+                                               <TableColumn fx:id="tableViewEnrolledColumnStrand" prefWidth="384.0" sortable="false" text="Strand" />
+                                                <TableColumn fx:id="tableViewEnrolledColumnSection" prefWidth="392.0" sortable="false" text="Section" />
                                             </columns>
                                           </TableView>
                                        </children>

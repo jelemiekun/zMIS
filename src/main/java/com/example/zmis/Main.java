@@ -27,7 +27,6 @@ public class Main extends Application {
         Image logo = new Image(String.valueOf(getClass().getResource("/com/example/zmis/logo.png")));
         stage.getIcons().add(logo);
         stage.setScene(scene);
-        stage.setResizable(false);
         stage.show();
     }
 
